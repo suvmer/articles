@@ -13,7 +13,7 @@ module.exports = async function(req, res, next) {
         if(post === null)
             throw ApiError.BadRequest("Статья не найдена");
         req.article = {...post};
-        req.comment = {body};
+        req.comment = {body, post_id: id};
         next();
     } catch(e) {
         next(e);
