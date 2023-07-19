@@ -25,6 +25,14 @@ class ArticleController {
             next(e);
         }
     }
+    async getArticles(req, res, next) {
+        try {
+            const posts = await Posts.findAll();
+            res.status(200).json({status: true, posts})
+        } catch(e) {
+            next(e);
+        }
+    }
     async editArticle(req, res, next) {
         try {
             const id = req.params.id;
@@ -54,15 +62,7 @@ class ArticleController {
             });
             if(!post)
                 throw ApiError.BadRequest("Статья не найдена");
-            res.status(200).json({status: true, post})
-        } catch(e) {
-            next(e);
-        }
-    }
-    async getArticles(req, res, next) {
-        try {
-            const posts = await Posts.findAll();
-            res.status(200).json({status: true, posts})
+            res.status(200).json({status: true})
         } catch(e) {
             next(e);
         }
