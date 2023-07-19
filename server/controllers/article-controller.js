@@ -42,6 +42,23 @@ class ArticleController {
             next(e);
         }
     }
+    async deleteArticle(req, res, next) {
+        try {
+            const id = req.params.id;
+            if(!id)
+                throw ApiError.BadRequest("Статья не найдена");
+            const post = await Posts.destroy({
+                where: {
+                    id: id
+                }
+            });
+            if(!post)
+                throw ApiError.BadRequest("Статья не найдена");
+            res.status(200).json({status: true, post})
+        } catch(e) {
+            next(e);
+        }
+    }
     async getArticles(req, res, next) {
         try {
             const posts = await Posts.findAll();

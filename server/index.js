@@ -21,6 +21,7 @@ const router = new Router();
 router.post('/article', ArticleMiddleware, ArticleController.addArticle);
 router.get('/article/:id', ArticleController.getArticle);
 router.patch('/article/:id', ArticleMiddleware, ArticleController.editArticle);
+router.delete('/article/:id', ArticleController.deleteArticle);
 router.get('/articles', ArticleController.getArticles);
 
 app.use("/", router)
