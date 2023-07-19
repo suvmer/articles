@@ -9,6 +9,7 @@ const db = require('./db.js');
 
 db.authenticate().catch(err => console.log(err));
 
+app.use(express.json())
 app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 
 const Router = require('express');
@@ -19,6 +20,7 @@ const ArticleController = require('./controllers/article-controller.js');
 const router = new Router();
 router.post('/article', ArticleMiddleware, ArticleController.addArticle);
 router.get('/article/:id', ArticleController.getArticle);
+router.patch('/article/:id', ArticleMiddleware, ArticleController.editArticle);
 router.get('/articles', ArticleController.getArticles);
 
 app.use("/", router)
