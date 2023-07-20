@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: 'App',
 
@@ -58,7 +59,18 @@ export default {
   methods: {
     isMobile() {
       return window.innerWidth < 1200;
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get('http://localhost:8000/articles')
+        this.posts = response.data.posts;
+      } catch(e) {
+        console.log(e);
+      }
     }
+  },
+  mounted() {
+    this.fetchPosts();
   }
 }
 </script>

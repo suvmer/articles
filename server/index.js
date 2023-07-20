@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors');
 
 const PORT = process.env.PORT || 8080
 
@@ -9,6 +10,7 @@ const db = require('./db.js');
 
 db.authenticate().catch(err => console.log(err));
 
+app.use(cors({origin: "http://localhost:8080"}));
 app.use(express.json())
 app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 
