@@ -18,13 +18,22 @@
         <v-list-item title="Комментарии" prepend-icon="mdi-account-box" link/>
       </v-list>
     </v-navigation-drawer>
-    
+    <v-main>
+      <v-container class="pa-0" fluid>
+        <v-list class="pa-2" lines="three">
+          <v-list-item
+            v-for="post in posts"
+            :key="post.id"
+            :title="post.title"
+            :subtitle="post.body"
+          />
+        </v-list>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
 
@@ -40,6 +49,7 @@ export default {
         body: "Something happened"
       },
       {
+        id: 2,
         title: "Dicer",
         body: "Is amogus alive?"
       }
