@@ -1,5 +1,6 @@
-const { DataTypes, Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("../db");
+const Comments = require("./Comments");
 
 const Posts = db.define('Posts',
 {
@@ -27,4 +28,5 @@ const Posts = db.define('Posts',
     }*/
 });
 Posts.sync();
+Posts.belongsTo(Comments, { as: 'comments', foreignKey: 'id', targetKey: 'post_id'});
 module.exports = Posts;
