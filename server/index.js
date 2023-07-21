@@ -10,7 +10,7 @@ const db = require('./db.js');
 
 db.authenticate().catch(err => console.log(err));
 
-app.use(cors({origin: "http://localhost:8080"}));
+app.use(cors({origin: true/*"http://localhost:8080"*/}));
 app.use(express.json())
 app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 
