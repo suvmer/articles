@@ -16,10 +16,6 @@ class ArticleController {
             const post = await Posts.findByPk(id);
             if(post === null)
                 throw ApiError.BadRequest("Статья не найдена");
-            /*await Posts.create({
-                title: "Boba",
-                body: "Aboba"
-            });*/
             res.status(200).json({status: true, post})
         } catch(e) {
             next(e);
