@@ -27,6 +27,14 @@
             :title="post.title"
             :subtitle="post.body"
           />
+          <v-list-item
+            v-if="posts.length == 0 && !isLoading"
+            title="Нет статей"
+          />
+          <v-list-item
+            v-if="posts.length == 0 && isLoading"
+            title="Загрузка..."
+          />
         </v-list>
       </v-container>
     </v-main>
@@ -43,18 +51,8 @@ export default {
 
   data: () => ({
     drawer: window.innerWidth >= 1200,
-    posts: [
-      {
-        id: 1,
-        title: "Nicer",
-        body: "Something happened"
-      },
-      {
-        id: 2,
-        title: "Dicer",
-        body: "Is amogus alive?"
-      }
-    ]
+    isLoading: false,
+    posts: []
   }),
   methods: {
     isMobile() {
@@ -62,10 +60,13 @@ export default {
     },
     async fetchPosts() {
       try {
+        this.isLoading = true;
         const response = await axios.get('http://localhost:8000/articles')
         this.posts = response.data.posts;
       } catch(e) {
         console.log(e);
+      } finally {
+        this.isLoading = false;
       }
     }
   },
