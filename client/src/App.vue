@@ -47,11 +47,15 @@
             </v-list-item>
           </v-card-actions>
         </v-card>
-        <v-list-item
+        <v-card
+          class="mx-auto my-2"
+          max-width="700"
           v-if="posts.length == 0 && !isLoading"
           title="Нет статей"
         />
-        <v-list-item
+        <v-card
+          class="mx-auto my-2"
+          max-width="700"
           v-if="posts.length == 0 && isLoading"
           title="Загрузка..."
         />
