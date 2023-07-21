@@ -59,6 +59,16 @@
           v-if="posts.length == 0 && isLoading"
           title="Загрузка..."
         />
+        <v-overlay
+          :model-value="isLoading"
+          class="align-center justify-center"
+        >
+          <v-progress-circular
+            color="primary"
+            indeterminate
+            size="64"
+          ></v-progress-circular>
+        </v-overlay>
       </v-container>
     </v-main>
   </v-app>
@@ -69,7 +79,6 @@ import axios from "axios";
 const {toDMY} = require('./utils');
 export default {
   name: 'App',
-
   components: {
   },
 
