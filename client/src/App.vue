@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <v-app-bar color="primary" class="flex-grow-0" hide-xl-only :elevation="1" app>
-      <v-app-bar-nav-icon v-if="isMobile()" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="mdAndDown" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>Список статей</v-app-bar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-navigation-drawer class="pa-2" disable-resize-watcher :permanent="!isMobile()" v-model="drawer" app>
+    <v-navigation-drawer class="pa-2" :permanent="!mdAndDown" v-model="drawer" app>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h5">#ВСтатье</v-list-item-title>
@@ -76,6 +76,9 @@
 
 <script>
 import axios from "axios";
+import { getCurrentInstance } from "vue";
+import { useDisplay } from "vuetify";
+const vuetify = require('./plugins/vuetify')
 const {toDMY} = require('./utils');
 export default {
   name: 'App',
@@ -83,15 +86,16 @@ export default {
   },
 
   data: () => ({
-    drawer: window.innerWidth >= 1200,
+    drawer: window.innerWidth > 1280,
     isLoading: false,
     posts: []
   }),
+  setup() {
+    const {mdAndDown} = useDisplay();
+    return {mdAndDown};
+  },
   methods: {
     toDMY: (timestamp) => toDMY(timestamp),
-    isMobile() {
-      return window.innerWidth < 1200;
-    },
     async fetchPosts() {
       try {
         this.isLoading = true;
