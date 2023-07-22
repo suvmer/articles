@@ -1,9 +1,8 @@
 <template>
-    <v-card title="Создание статьи" class="pa-2">
-        <v-form ref="form" class="pa-2">
+    <v-card :title="isEditing ? 'Редактирование статьи' : 'Создание статьи'" class="pa-2">
+        <v-form class="pa-2">
             <v-text-field
                 v-model="post.title"
-                
                 label="Название статьи"
                 required
             />
@@ -17,7 +16,7 @@
                 block
                 @click="addArticle"
             >
-                Добавить статью
+                {{ isEditing ? 'Отредактировать' : 'Добавить статью' }}
             </v-btn>
         </v-form>
     </v-card>
@@ -31,6 +30,22 @@ export default {
             body: ""
         }
     }),
+    props: {
+        isEditing: {
+            type: Boolean,
+            default: false
+        },
+        toEdit: {
+            type: Object,
+            default: {
+                title: "",
+                body: ""
+            }
+        }
+    },
+    mounted() {
+        this.post = this.toEdit;
+    },
     methods: {
         addArticle() {
             this.$emit('createArticle', this.post);
