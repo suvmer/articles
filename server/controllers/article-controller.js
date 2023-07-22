@@ -23,7 +23,9 @@ class ArticleController {
     }
     async getArticles(req, res, next) {
         try {
-            const posts = await Posts.findAll();
+            const posts = await Posts.findAll({
+                order: [["createdAt", "DESC"]]
+            });
             res.status(200).json({status: true, posts})
         } catch(e) {
             next(e);

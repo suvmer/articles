@@ -32,7 +32,8 @@ class CommentsController {
             const comments = await Comments.findAll({
                 where: {
                     post_id: id
-                }
+                },
+                order: [["createdAt", "DESC"]]
             });
             res.status(200).json({status: true, comments})
         } catch(e) {
