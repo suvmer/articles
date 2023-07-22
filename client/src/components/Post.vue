@@ -7,6 +7,9 @@
         <template v-slot:prepend>
             <v-icon size="x-large">mdi-post-outline</v-icon>
         </template>
+        <template v-slot:append>
+            <v-icon size="x-large">mdi-pencil</v-icon>
+        </template>
 
         <v-card-text class="text-h5 py-2">
             {{ post.body }}
