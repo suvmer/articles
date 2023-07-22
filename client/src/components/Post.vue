@@ -24,7 +24,7 @@
             </v-list-item>
         </v-card-actions>
     </v-card>
-    <CommentsList v-bind:comments="post.comments"/>
+    <CommentsList v-if="expanded" v-bind:comments="post.comments"/>
 </template>
 
 <script>
@@ -38,6 +38,10 @@ export default {
         post: {
             type: Object,
             required: true
+        },
+        expanded: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
