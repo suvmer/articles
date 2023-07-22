@@ -24,11 +24,16 @@
             </v-list-item>
         </v-card-actions>
     </v-card>
+    <CommentsList v-bind:comments="post.comments"/>
 </template>
 
 <script>
+import CommentsList from './CommentsList';
 const {toDMY} = require('../utils');
 export default {
+    components: {
+        CommentsList
+    },
     props: {
         post: {
             type: Object,
