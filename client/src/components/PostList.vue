@@ -3,6 +3,7 @@
         class="mx-auto my-2"
         v-for="post in posts"
         v-bind:post="post"
+        :expanded="true"
     />
     <v-card
         class="mx-auto my-2"

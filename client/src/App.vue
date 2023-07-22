@@ -25,7 +25,7 @@
     <v-main>
         <v-list max-width="700" class="pa-1 mx-auto">
           <PostForm @createArticle="createArticle"/>
-          <PostList v-bind:posts="this.posts"/>
+          <PostList @editComment="editComment" v-bind:posts="this.posts"/>
           <v-overlay
             :model-value="isLoading"
             class="align-center justify-center"
@@ -98,6 +98,16 @@ export default {
           alert(e.response.data?.message)
       } finally {
         this.isLoading = false;
+      }
+    },
+    async editComment(comment) {
+      try {
+          const response = await axios.patch(`http://192.168.1.134:8000/article/${comment.post_id}/comment/${comment.id}`, {...comment})
+          console.log(response);
+      } catch(e) {
+          console.log(e);
+          if(e.response?.data?.message)
+              alert(e.response.data.message)
       }
     }
   },
