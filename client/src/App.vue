@@ -24,7 +24,7 @@
     </v-navigation-drawer>
     <v-main>
         <v-list max-width="700" class="pa-1 mx-auto">
-          <PostForm :toEdit="{title: 'raz', body: 'dva'}" @createArticle="createArticle"/>
+          <PostForm @createArticle="createArticle"/>
           <PostList v-bind:posts="this.posts"/>
           <v-overlay
             :model-value="isLoading"
@@ -46,7 +46,6 @@ import axios from "axios";
 import { useDisplay } from "vuetify";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
-const vuetify = require('./plugins/vuetify')
 export default {
   name: 'App',
   components: {
