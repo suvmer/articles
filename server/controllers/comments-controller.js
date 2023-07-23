@@ -33,6 +33,9 @@ class CommentsController {
                 where: {
                     post_id: id
                 },
+                include:  [
+                    {model: Posts, attributes:['title']}
+                ],
                 order: [["createdAt", "DESC"]]
             });
             res.status(200).json({status: true, comments})

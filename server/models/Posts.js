@@ -28,5 +28,4 @@ const Posts = db.define('Posts',
     }*/
 });
 Posts.sync();
-Posts.belongsTo(Comments, { as: 'comments', foreignKey: 'id', targetKey: 'post_id'});
 module.exports = Posts;

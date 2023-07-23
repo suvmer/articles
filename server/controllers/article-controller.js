@@ -1,4 +1,5 @@
 const ApiError = require("../exceptions/ApiError");
+const Comments = require("../models/Comments");
 const Posts = require("../models/posts");
 
 class ArticleController {
@@ -13,7 +14,11 @@ class ArticleController {
     async getArticle(req, res, next) {
         try {
             const id = req.params.id;
-            const post = await Posts.findByPk(id);
+            const post = await Posts.findByPk(id,{
+                include:  [
+                    {model: Comments, attributes:['body'], as: 'comments'}
+                ]
+            });
             if(post === null)
                 throw ApiError.BadRequest("Статья не найдена");
             res.status(200).json({status: true, post})
