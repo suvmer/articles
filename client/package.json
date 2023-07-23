@@ -7,9 +7,12 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@mdi/font": "5.9.55",
+    "@vuepic/vue-datepicker": "^5.4.0",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "date-fns": "^2.0.0-beta.5",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
