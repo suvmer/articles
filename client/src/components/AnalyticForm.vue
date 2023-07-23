@@ -10,8 +10,8 @@
             cancel-text="Отмена"
             v-model="dates"
             range week-start="1"
-            preview-format="dd/mm/yyyy"
-            format="dd/mm/yyyy"
+            format="dd/MM/yyyy"
+            @update:model-value="handleDate"
         />
     </v-card>
 </template>
@@ -28,6 +28,10 @@ export default {
         dates: [new Date(Date.now().valueOf() - 30*24*60*60*1000), Date.now()]
     }),
     methods: {
+        handleDate(newValue) {
+            this.dates = newValue;
+            this.$emit('selectDates', newValue);
+        }
     }
 }
 </script>
