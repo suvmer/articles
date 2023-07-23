@@ -49,32 +49,18 @@ export default {
       try {
         this.isLoading = true;
         const response = await axios.get('http://192.168.1.134:8000/articles')
-        this.posts = response.data.posts.map(el => ({...el, comments: []}));
+        this.posts = response.data.posts;
       } catch(e) {
         console.log(e);
       } finally {
         this.isLoading = false;
       }
-      this.fetchAllComments()
-    },
-    async fetchAllComments() {
-      try {
-        this.posts.forEach(async post => this.fetchComments(post));
-      } catch(e) {
-        console.log(e);
-      }
-    },
-    async fetchComments(post) {
-      const response = await axios.get(`http://192.168.1.134:8000/article/${post.id}/comments`);
-      if(response.status == 200)
-        this.posts = this.posts.map(newpost => newpost.id === post.id ? ({...newpost, comments: [...response.data.comments]}) : newpost)
     },
     async createArticle(post) {
       try {
         this.isLoading = true;
         const response = await axios.post('http://192.168.1.134:8000/article', {...post})
-        this.posts = [...this.posts, ({...response.data.post, comments: []})];
-        this.fetchComments(response.data.post);
+        this.posts = [...this.posts, response.data.post];
       } catch(e) {
         console.log(e);
         if(e.response.data?.message)
