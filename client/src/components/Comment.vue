@@ -6,6 +6,7 @@
     >
         <template v-slot:title>
             {{ !isEdit ? comment.body : "" }}
+            {{ (!isEdit && expanded) ? ` (К записи: ${comment.Post.title})` : "" }}
             <v-textarea
                 v-if="isEdit"
                 v-model="newComment.body"
@@ -36,6 +37,9 @@ export default {
         },
         isEdit: {
             type: Boolean,
+            default: false
+        },
+        expanded: {
             default: false
         }
     },

@@ -4,6 +4,7 @@
         class="mx-auto my-2"
         v-for="comment in comments"
         v-bind:comment="comment"
+        v-bind:expanded="expanded"
     />
     <v-card
         class="mx-auto my-2"
@@ -23,6 +24,9 @@ export default {
         comments: {
             type: Array,
             required: true
+        },
+        expanded: {
+            default: false
         }
     },
     methods: {

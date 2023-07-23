@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <AnalyticForm @selectDates="selectDates"/>
-        <Comments v-bind:comments="this.comments"/>
+        <Comments :expanded="true" v-bind:comments="this.comments"/>
         <v-list max-width="700" class="pa-1 mx-auto">
             <v-overlay
                 :model-value="isLoading"
