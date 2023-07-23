@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const Comments = require("../models/Comments");
 const ApiError = require("../exceptions/ApiError");
+const Posts = require("../models/posts");
 
 class AnalyticController {
     async getComments(req, res, next) {
@@ -14,6 +15,9 @@ class AnalyticController {
                         [Op.lte]: new Date(+req.query.dateTo)
                     },
                 },
+                include:  [
+                    {model: Posts}
+                ],
                 order: [["post_id", "ASC"]]
             });
             res.status(200).json({status: true, comments})
