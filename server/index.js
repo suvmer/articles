@@ -44,6 +44,6 @@ app.use(errorMiddleware);
 function initializeModels() {
     const Posts = require('./models/posts.js');
     const Comments = require('./models/Comments.js');
-    Posts.hasMany(Comments, { as:"comments", foreignKey: 'id', targetKey: 'post_id'});
+    Posts.hasMany(Comments, { as:"comments", foreignKey: 'post_id', targetKey: 'id'});
     Comments.belongsTo(Posts, { foreignKey: 'post_id', targetKey: 'id'})
 }
