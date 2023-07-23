@@ -5,7 +5,11 @@ const Posts = require("../models/posts");
 class CommentsController {
     async addComment(req, res, next) {
         try {
-            const comment = await Comments.create({...req.comment}); //safe after comment-middleware
+            const comment = await Comments.create({...req.comment}, {
+                include:  [
+                    {model: Posts}
+                ]
+            }); //safe after comment-middleware
             res.status(200).json({status: true, comment})
         } catch(e) {
             next(e); //gives e to error-middleware
@@ -14,7 +18,11 @@ class CommentsController {
     async getComment(req, res, next) {
         try {
             const id = req.params.id;
-            const post = await Posts.findByPk(id);
+            const post = await Posts.findByPk(id, {
+                include:  [
+                    {model: Posts}
+                ]
+            });
             if(post === null)
                 throw ApiError.BadRequest("Статья не найдена");
             const commid = req.params.commid;
@@ -34,7 +42,7 @@ class CommentsController {
                     post_id: id
                 },
                 include:  [
-                    {model: Posts, attributes:['title']}
+                    {model: Posts}
                 ],
                 order: [["createdAt", "DESC"]]
             });

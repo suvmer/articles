@@ -5,7 +5,11 @@ const Posts = require("../models/posts");
 class ArticleController {
     async addArticle(req, res, next) {
         try {
-            const post = await Posts.create({...req.article}); //safe after article-middleware
+            const post = await Posts.create({...req.article}, {
+                include:  [
+                    {model: Comments, as: 'comments'}
+                ]
+            }); //safe after article-middleware
             res.status(200).json({status: true, post})
         } catch(e) {
             next(e); //gives e to error-middleware
@@ -16,7 +20,7 @@ class ArticleController {
             const id = req.params.id;
             const post = await Posts.findByPk(id,{
                 include:  [
-                    {model: Comments, attributes:['body'], as: 'comments'}
+                    {model: Comments, as: 'comments'}
                 ]
             });
             if(post === null)
@@ -29,7 +33,10 @@ class ArticleController {
     async getArticles(req, res, next) {
         try {
             const posts = await Posts.findAll({
-                order: [["createdAt", "DESC"]]
+                order: [["createdAt", "DESC"]],
+                include:  [
+                    {model: Comments, as: 'comments'}
+                ]
             });
             res.status(200).json({status: true, posts})
         } catch(e) {
