@@ -1,15 +1,18 @@
 <template>
-    <Post
-        class="mx-auto my-2"
-        v-for="post in posts"
-        v-bind:post="post"
-        :expanded="true"
-    />
-    <v-card
-        class="mx-auto my-2"
-        v-if="posts.length == 0"
-        title="Нет статей"
-    />
+    <div>
+        <Post
+            class="mx-auto my-2"
+            v-for="post in posts"
+            v-bind:post="post"
+            :key="post.id"
+            :expanded="true"
+        />
+        <v-card
+            class="mx-auto my-2"
+            v-if="posts.length == 0"
+            title="Нет статей"
+        />
+    </div>
 </template>
 
 <script>
