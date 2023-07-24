@@ -1,18 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router"
 import Articles from "../pages/Articles"
 import Comments from "../pages/Comments"
+import PostInfo from "../pages/PostInfo"
+
 const routes = [
     {
         name: "Список статей",
         path: '/',
         component:  Articles,
-        meta: { title: 'Список статей - Articles by Suvmer' }
     },
     {
         name: "Комментарии",
         path: '/comments',
         component:  Comments,
-        meta: { title: 'Комментарии - Articles by Suvmer' }
+    },
+    {
+        name: "Статья",
+        path: '/post/:id',
+        component: PostInfo,
+        props: (route) => ({id: route.params.id})
     }
 ]
 
