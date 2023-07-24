@@ -1,6 +1,9 @@
 # articles
 A simple full-stack application created as a test task
 
+# Как настроить БД:
+1. Указать данные для подключения к БД в post
+
 # Тестовое задание: Статьи
 
 ## Комментарий
