@@ -3,6 +3,7 @@
         <v-card
             class="mx-auto my-2"
             :key="post.id"
+            :to='"/post/"+post.id'
         >
             <template v-slot:title>
                 <v-card-title :class="expanded ? 'text-wrap' : ''">{{post.title}}</v-card-title>

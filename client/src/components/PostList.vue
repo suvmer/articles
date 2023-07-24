@@ -5,7 +5,7 @@
             v-for="post in posts"
             v-bind:post="post"
             :key="post.id"
-            :expanded="true"
+            :expanded="this.expanded"
         />
         <v-card
             class="mx-auto my-2"
@@ -26,6 +26,10 @@ export default {
         posts: {
             type: Array,
             required: true
+        },
+        expanded: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
