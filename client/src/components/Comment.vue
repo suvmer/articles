@@ -5,13 +5,14 @@
         variant="outlined"
     >
         <template v-slot:title>
-            {{ !isEdit ? comment.body : "" }}
+            <v-list-item-title class="text-wrap">{{ !isEdit ? comment.body : "" }}</v-list-item-title>
             <v-textarea
                 v-if="isEdit"
                 v-model="newComment.body"
                 label="Текст комментария"
             />
         </template>
+
         <template v-slot:subtitle>
             {{toDMY(comment.createdAt)}}{{newComment.createdAt != newComment.updatedAt ? ` (Изменён: ${toDMY(newComment.updatedAt)})` : ''}}
         </template>
