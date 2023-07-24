@@ -1,24 +1,37 @@
 <template>
-    <v-card title="Комментарии" variant="flat"/>
-    <Comment
-        class="mx-auto my-2"
-        v-for="comment in comments"
-        v-bind:comment="comment"
-        v-bind:expanded="expanded"
-    />
-    <v-card
-        class="mx-auto my-2"
-        v-if="comments.length == 0"
-        title="Нет комментариев"
+    <div>
+        <v-card :title="!noCommentTitle ? 'Комментарии' : ''" variant="flat"/>
+        <Comment
+            v-if="!groupped"
+            class="mx-auto my-2"
+            v-for="comment in comments"
+            v-bind:comment="comment"
+            v-bind:expanded="expanded"
         />
+        <Post
+            v-if="groupped"
+            v-for="comments in commentsGroups"
+            v-bind:post="{...comments[0].Post, comments: comments}"
+            :key="comments[0].Post.CreatedAt"
+            :expanded="true"
+            :noCommentTitle="true"
+            class="mx-auto ma-2"
+        ></Post>
+        <v-card
+            class="mx-auto my-2"
+            v-if="comments.length == 0"
+            title="Нет комментариев"
+            />
+    </div>
 </template>
 
 <script>
+import Post from './Post'
+import Comment from './Comment';
 const {toDMY} = require('../utils');
-import Comment from './Comment'
 export default {
     components: {
-        Comment
+        Post, Comment
     },
     props: {
         comments: {
@@ -27,7 +40,25 @@ export default {
         },
         expanded: {
             default: false
+        },
+        groupped: {
+            default: false
+        },
+        noCommentTitle: {
+            default: false
         }
+    },
+    computed: {
+        commentsGroups() {
+            return this.comments.reduce((acc, cur) => { //groupping by post: [[com1_1, com2_1], [com1_2], [com1_3, com2_3], ...]
+                if(acc.prev != cur.post_id)
+                    return {prev: cur.post_id, comments: [...acc.comments, [cur]]}
+                return {prev: cur.post_id, comments: acc.comments.map((el, ind) => ind == acc.comments.length - 1 ? [...el, cur] : el)}
+            }, {prev: null, comments: []}).comments;
+        }
+    },
+    mounted() {
+        
     },
     methods: {
         toDMY: (timestamp) => toDMY(timestamp),

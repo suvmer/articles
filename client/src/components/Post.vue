@@ -28,16 +28,15 @@
                 </v-list-item>
             </v-card-actions>
         </v-card>
-        <CommentsList v-if="expanded" v-bind:comments="post.comments"/>
+        <CommentsList v-if="expanded" :noCommentTitle="noCommentTitle" v-bind:comments="post.comments"/>
     </div>
 </template>
 
 <script>
-import CommentsList from './CommentsList';
 const {toDMY} = require('../utils');
 export default {
-    components: {
-        CommentsList
+    beforeCreate() { //HACK to avoid circular dependency
+       this.$options.components.CommentsList = require('./CommentsList').default
     },
     props: {
         post: {
@@ -45,6 +44,10 @@ export default {
             required: true
         },
         expanded: {
+            type: Boolean,
+            default: false
+        },
+        noCommentTitle: {
             type: Boolean,
             default: false
         }
