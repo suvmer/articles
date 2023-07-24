@@ -3,8 +3,10 @@
         <v-card
             class="mx-auto my-2"
             :key="post.id"
-            :title="post.title"
         >
+            <template v-slot:title>
+                <v-card-title :class="expanded ? 'text-wrap' : ''">{{post.title}}</v-card-title>
+            </template>
             <template v-slot:prepend>
                 <v-icon size="x-large">mdi-post-outline</v-icon>
             </template>
@@ -12,7 +14,7 @@
                 <v-icon size="x-large">mdi-pencil</v-icon>
             </template>
 
-            <v-card-text class="text-h5 py-2">
+            <v-card-text style="line-height: 1.7rem;" class="text-h5 py-2 ">
                 {{ post.body }}
             </v-card-text>
 
