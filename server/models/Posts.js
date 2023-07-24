@@ -27,4 +27,6 @@ const Posts = db.define('Posts',
         allowNull: true
     }*/
 });
+Posts.hasMany(Comments, { as:"comments", foreignKey: 'post_id', targetKey: 'id'});
+Comments.belongsTo(Posts, { foreignKey: 'post_id', targetKey: 'id'})
 module.exports = Posts;

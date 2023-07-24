@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 8080
 const app = express();
 const db = require('./db.js');
 db.authenticate().catch(err => console.log(err));
-initializeModels();
 
 app.use(cors({origin: true/*"http://localhost:8080"*/}));
 app.use(express.json())
@@ -40,13 +39,3 @@ router.get('/analytic/comments/', AnalyticController.getComments);
 
 app.use("/", router)
 app.use(errorMiddleware);
-
-
-async function initializeModels() {
-    const Posts = require('./models/Posts.js');
-    const Comments = require('./models/Comments.js');
-    await Comments.sync();
-    await Posts.sync();
-    Posts.hasMany(Comments, { as:"comments", foreignKey: 'post_id', targetKey: 'id'});
-    Comments.belongsTo(Posts, { foreignKey: 'post_id', targetKey: 'id'})
-}
