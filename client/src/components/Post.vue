@@ -35,6 +35,7 @@
 <script>
 const {toDMY} = require('../utils');
 export default {
+    components: {},
     beforeCreate() { //HACK to avoid circular dependency
        this.$options.components.CommentsList = require('./CommentsList').default
     },
