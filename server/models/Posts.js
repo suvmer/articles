@@ -27,5 +27,4 @@ const Posts = db.define('Posts',
         allowNull: true
     }*/
 });
-Posts.sync();
 module.exports = Posts;

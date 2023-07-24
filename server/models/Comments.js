@@ -18,5 +18,4 @@ const Comments = db.define('Comments',
         allowNull: false
     }
 });
-Comments.sync();
 module.exports = Comments;
