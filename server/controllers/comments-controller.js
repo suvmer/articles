@@ -18,15 +18,15 @@ class CommentsController {
     async getComment(req, res, next) {
         try {
             const id = req.params.id;
-            const post = await Posts.findByPk(id, {
+            const post = await Posts.findByPk(id);
+            if(post === null)
+                throw ApiError.BadRequest("Статья не найдена");
+            const commid = req.params.commid;
+            const comment = await Comments.findByPk(commid, {
                 include:  [
                     {model: Posts}
                 ]
             });
-            if(post === null)
-                throw ApiError.BadRequest("Статья не найдена");
-            const commid = req.params.commid;
-            const comment = await Comments.findByPk(commid);
             if(comment === null || comment.post_id != post.id)
                 throw ApiError.BadRequest("Комментарий не найден");
             res.status(200).json({status: true, comment})
