@@ -3,7 +3,7 @@ A simple full-stack application created as a test task
 
 # Подготовка БД:
 1. Указать данные для подключения к БД в config/config.js
-2. Выполнить миграции и сиды(в папке server):
+2. Выполнить миграции и сиды(находясь в папке server):
 ```
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
