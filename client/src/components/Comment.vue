@@ -6,7 +6,6 @@
     >
         <template v-slot:title>
             {{ !isEdit ? comment.body : "" }}
-            {{ (!isEdit && expanded) ? ` (К записи: ${comment.Post.title})` : "" }}
             <v-textarea
                 v-if="isEdit"
                 v-model="newComment.body"
@@ -14,7 +13,7 @@
             />
         </template>
         <template v-slot:subtitle>
-            {{toDMY(comment.createdAt)}}{{comment.createdAt != comment.updatedAt ? ` (Изменён: ${toDMY(comment.updatedAt)})` : ''}}
+            {{toDMY(comment.createdAt)}}{{newComment.createdAt != newComment.updatedAt ? ` (Изменён: ${toDMY(newComment.updatedAt)})` : ''}}
         </template>
         <template v-slot:prepend>
             <v-icon size="x-large">mdi-account-circle</v-icon>
@@ -38,9 +37,6 @@ export default {
         isEdit: {
             type: Boolean,
             default: false
-        },
-        expanded: {
-            default: false
         }
     },
     mounted() {
@@ -48,15 +44,14 @@ export default {
         this.isEditing = this.isEdit;
     },
     data: () => ({
-        newComment: {
-            body: ""
-        },
+        newComment: {},
         isEditing: false
     }),
     methods: {
         toDMY: (timestamp) => toDMY(timestamp),
         editComment() {
             console.log(this.newComment)
+            this.newComment = {...this.newComment, updatedAt: Date.now().valueOf()}
             this.$parent.$parent.$parent.$emit('editComment', this.newComment)
         }
     }
