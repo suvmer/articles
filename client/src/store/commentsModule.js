@@ -2,13 +2,15 @@ import axios from "axios";
 
 export const commentsModule = {
     state: () => ({
-        
+        commentStats: []
     }),
     getters: {
         
     },
     mutations: {
-        
+        setCommentStats(state, comments) {
+            state.commentStats = comments;
+        }
     },
     actions: {
         async editComment({state, commit}, comment) {

@@ -3,7 +3,7 @@
         <v-card
             class="mx-auto my-2"
             :key="post.id"
-            :to='(isEditing||expanded) ? "" : "/post/"+post.id'
+            :to='((isEditing||expanded) && showCommentsForm) ? "" : "/post/"+post.id'
         >
             <template v-slot:title>
                 <v-card-title :class="expanded ? 'text-wrap' : ''">{{ !isEditing ? newPost.title : "" }}</v-card-title>
@@ -44,7 +44,7 @@
                 </v-list-item>
             </v-card-actions>
         </v-card>
-        <CommentForm class="mt-10" v-if="expanded" v-bind:post_id="post.id"/>
+        <CommentForm class="mt-10" v-if="(expanded && showCommentsForm)" v-bind:post_id="post.id"/>
         <CommentsList class="mt-2" v-if="expanded" :noCommentTitle="noCommentTitle" v-bind:comments="post.comments"/>
     </div>
 </template>
@@ -68,6 +68,10 @@ export default {
         expanded: {
             type: Boolean,
             default: false
+        },
+        showCommentsForm: {
+            type: Boolean,
+            default: true
         },
         noCommentTitle: {
             type: Boolean,

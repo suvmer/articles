@@ -16,7 +16,8 @@
             :key="comments[0].Post.CreatedAt"
             :expanded="true"
             :noCommentTitle="true"
-            class="mx-auto ma-2"
+            :showCommentsForm="showCommentsForm"
+            class="mx-auto ma-2 mt-4"
         ></Post>
         <v-card
             class="mx-auto my-2"
@@ -47,6 +48,9 @@ export default {
         },
         noCommentTitle: {
             default: false
+        },
+        showCommentsForm: {
+            default: true
         }
     },
     computed: {

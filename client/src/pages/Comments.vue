@@ -1,10 +1,10 @@
 <template>
     <v-main>
-        <AnalyticForm @selectDates="selectDates"/>
-        <Comments :expanded="true" :groupped="true" v-bind:comments="this.comments"/>
-        <v-list max-width="700" class="pa-1 mx-auto">
+        <v-list max-width="700" class="pa-1 mx-auto overflow-visible">
+          <AnalyticForm @selectDates="selectDates"/>
+          <CommentsList :showCommentsForm="false" :expanded="true" :groupped="true" v-bind:comments="this.$store.state.comment.commentStats"/>
             <v-overlay
-                :model-value="isLoading"
+                :model-value="this.$store.state.ui.isLoading"
                 class="align-center justify-center"
             >
                 <v-progress-circular
@@ -19,32 +19,30 @@
   
   <script>
   import axios from "axios";
-  import Comments from "../components/CommentsList";
+  import CommentsList from "../components/CommentsList";
   import AnalyticForm from "../components/AnalyticForm";
   
   export default {
     name: 'App',
     components: {
-        Comments,
+        CommentsList,
         AnalyticForm
     },
   
     data: () => ({
       drawer: window.innerWidth >= 1280,
-      isLoading: false,
-      comments: [],
       dates: [new Date(Date.now().valueOf() - 30*24*60*60*1000), Date.now()]
     }),
     methods: {
       async fetchAllComments(dateFrom = 0, dateTo = 9999999999999) {
         try {
-            this.isLoading = true;
+            this.$store.commit('setLoading', true);
             const response = await axios.get('http://192.168.1.134:8000/analytic/comments', {params: {dateFrom, dateTo}});
-            this.comments = response.data.comments;
+            this.$store.commit('setCommentStats', response.data.comments);
         } catch(e) {
             console.log(e);
         } finally {
-            this.isLoading = false;
+            this.$store.commit('setLoading', false);
         }
       },
       selectDates(dates) {
