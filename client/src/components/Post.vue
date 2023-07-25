@@ -20,7 +20,7 @@
             <template v-slot:append>
                 <v-icon v-if="!isEditing" @click="$event.preventDefault(); isEditing = true">mdi-pencil</v-icon>
                 <v-icon v-else @click="isEditing = false; editPost()">mdi-check-bold</v-icon>
-                <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deletePost', this.newPost); this.$router.back();"/>
+                <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deletePost', this.newPost); if(expanded) this.$router.back();"/>
             </template>
 
             <v-card-text style="line-height: 1.7rem;" class="text-h5 py-2 ">
