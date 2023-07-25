@@ -38,7 +38,7 @@
                     <span class="subheading me-2">{{post.comments.length}}</span>
                     <template v-slot:append>
                         <div class="justify-self-end">
-                            <v-list-item-subtitle>{{toDMY(post.createdAt)}}</v-list-item-subtitle>
+                            <v-list-item-subtitle>{{toDMY(post.createdAt)}}{{newPost.createdAt != newPost.updatedAt ? ` (Изменён: ${toDMY(newPost.updatedAt)})` : ''}}</v-list-item-subtitle>
                         </div>
                     </template>
                 </v-list-item>
