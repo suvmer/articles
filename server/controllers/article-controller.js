@@ -79,6 +79,11 @@ class ArticleController {
                     id: id
                 }
             });
+            await Comments.destroy({
+                where: {
+                    post_id: id
+                }
+            });
             if(!post)
                 throw ApiError.BadRequest("Статья не найдена");
             res.status(200).json({status: true})
