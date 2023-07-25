@@ -17,6 +17,10 @@ export const articleModule = {
         },
         removePost(state, id) {
             state.posts = state.posts.filter(post => post.id != id);
+        },
+        removeComment(state, id) {
+            if(state.postToShow !== null)
+                state.postToShow = {...state.postToShow, comments: state.postToShow.comments.filter(comment => comment.id != id)};
         }
     },
     actions: {
