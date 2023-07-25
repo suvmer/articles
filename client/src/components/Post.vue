@@ -44,16 +44,18 @@
                 </v-list-item>
             </v-card-actions>
         </v-card>
-        <CommentsList v-if="expanded" :noCommentTitle="noCommentTitle" v-bind:comments="post.comments"/>
+        <CommentForm class="mt-10" v-if="expanded" v-bind:post_id="post.id"/>
+        <CommentsList class="mt-2" v-if="expanded" :noCommentTitle="noCommentTitle" v-bind:comments="post.comments"/>
     </div>
 </template>
 
 <script>
 import DeleteIcon from './DeleteIcon'
+import CommentForm from './CommentForm'
 const {toDMY} = require('../utils');
 export default {
     components: {
-        DeleteIcon
+        DeleteIcon, CommentForm
     },
     beforeCreate() { //HACK to avoid circular dependency
        this.$options.components.CommentsList = require('./CommentsList').default
