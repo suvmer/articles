@@ -29,6 +29,18 @@ export const commentsModule = {
                 if(e.response?.data?.message)
                     alert(e.response.data.message)
             }
-          },
+        },
+          
+        async createComment({state, commit}, comment) {
+            try {
+                const response = await axios.post(`http://192.168.1.134:8000/article/${comment.post_id}/comment`, {...comment})
+                console.log(response)
+                commit('addComment', response.data.comment);
+            } catch(e) {
+                console.log(e);
+                if(e.response.data?.message)
+                    alert(e.response.data?.message)
+            }
+        }
     }
 }

@@ -14,6 +14,11 @@ export const articleModule = {
         },
         setPosts(state, posts) {
             state.posts = posts;
+            console.log(state.posts)
+        },
+        addComment(state, comment) {
+            if(state.postToShow !== null)
+                state.postToShow = {...state.postToShow, comments: [{...comment, createdAt: Date.now(), updatedAt: Date.now()}, ...state.postToShow.comments]};
         },
         removePost(state, id) {
             state.posts = state.posts.filter(post => post.id != id);
@@ -69,7 +74,7 @@ export const articleModule = {
             try {
                 commit('setLoading', true);
                 const response = await axios.post('http://192.168.1.134:8000/article', {...post})
-                commit('setPosts',  [...state.posts, response.data.post]);
+                commit('setPosts',  [response.data.post, ...state.posts]);
             } catch(e) {
                 console.log(e);
                 if(e.response.data?.message)
