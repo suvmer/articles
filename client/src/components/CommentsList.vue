@@ -5,6 +5,7 @@
             v-if="!groupped"
             class="mx-auto my-2"
             v-for="comment in comments"
+            :key="comment.id"
             v-bind:comment="comment"
             v-bind:expanded="expanded"
         />
