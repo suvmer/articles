@@ -18,7 +18,7 @@ const routes = [
         name: "Статья",
         path: '/post/:id',
         component: PostInfo,
-        props: (route) => ({id: route.params.id})
+        props: (route) => ({id: +route.params.id})
     }
 ]
 
