@@ -5,7 +5,7 @@ const Posts = require("../models/posts");
 class ArticleController {
     async addArticle(req, res, next) {
         try {
-            const post = await Posts.create({...req.article}, {
+            var post = await Posts.create({...req.article}, {
                 include:  [{
                     model: Comments,
                     as: 'comments',
@@ -13,7 +13,7 @@ class ArticleController {
                     separate: true
                 }]
             }); //safe after article-middleware
-            res.status(200).json({status: true, post})
+            res.status(200).json({status: true, post: {...post.dataValues, comments: []}})
         } catch(e) {
             next(e); //gives e to error-middleware
         }
