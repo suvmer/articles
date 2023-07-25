@@ -6,9 +6,12 @@ class ArticleController {
     async addArticle(req, res, next) {
         try {
             const post = await Posts.create({...req.article}, {
-                include:  [
-                    {model: Comments, as: 'comments'}
-                ]
+                include:  [{
+                    model: Comments,
+                    as: 'comments',
+                    order: [["createdAt", 'DESC']],
+                    separate: true
+                }]
             }); //safe after article-middleware
             res.status(200).json({status: true, post})
         } catch(e) {
@@ -19,9 +22,12 @@ class ArticleController {
         try {
             const id = req.params.id;
             const post = await Posts.findByPk(id,{
-                include:  [
-                    {model: Comments, as: 'comments'}
-                ]
+                include:  [{
+                    model: Comments,
+                    as: 'comments',
+                    order: [["createdAt", 'DESC']],
+                    separate: true
+                }]
             });
             if(post === null)
                 throw ApiError.BadRequest("Статья не найдена");
@@ -34,9 +40,12 @@ class ArticleController {
         try {
             const posts = await Posts.findAll({
                 order: [["createdAt", "DESC"]],
-                include:  [
-                    {model: Comments, as: 'comments'}
-                ]
+                include:  [{
+                    model: Comments,
+                    as: 'comments',
+                    order: [["createdAt", 'DESC']],
+                    separate: true
+                }]
             });
             res.status(200).json({status: true, posts})
         } catch(e) {
