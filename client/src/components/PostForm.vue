@@ -1,6 +1,6 @@
 <template>
     <v-card :title="isEditing ? 'Редактирование статьи' : 'Создание статьи'" class="pa-2">
-        <v-form class="pa-2">
+        <v-form @submit.prevent class="pa-2">
             <v-text-field
                 v-model="post.title"
                 label="Название статьи"
@@ -14,7 +14,7 @@
                 color="success"
                 class="mt-1"
                 block
-                @click="addArticle"
+                @click="addPost"
             >
                 {{ isEditing ? 'Отредактировать' : 'Добавить статью' }}
             </v-btn>
@@ -47,8 +47,8 @@ export default {
         this.post = this.toEdit;
     },
     methods: {
-        addArticle() {
-            this.$emit('createArticle', this.post);
+        addPost() {
+            this.$store.dispatch('createPost', this.post);
             this.post = {
                 title: "",
                 body: ""
