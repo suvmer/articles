@@ -3,7 +3,7 @@
         <v-card
             class="mx-auto my-2"
             :key="post.id"
-            :to='((isEditing||expanded) && showCommentsForm) ? "" : "/post/"+post.id'
+            :to='(isEditing || (expanded && showCommentsForm)) ? "" : "/post/"+post.id'
         >
             <template v-slot:title>
                 <v-card-title :class="expanded ? 'text-wrap' : ''">{{ !isEditing ? newPost.title : "" }}</v-card-title>
