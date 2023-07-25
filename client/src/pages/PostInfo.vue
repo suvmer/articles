@@ -1,9 +1,9 @@
 <template>
     <v-main>
-        <Post v-if="getPost != null" :expanded="true" v-bind:post="getPost"/>
         <v-list max-width="700" class="pa-1 mx-auto">
+            <Post v-if="getPost != null" :expanded="true" v-bind:post="getPost"/>
             <v-overlay
-                :model-value="this.$store.state.article.isLoading"
+                :model-value="this.$store.state.ui.isLoading"
                 class="align-center justify-center"
             >
                 <v-progress-circular
