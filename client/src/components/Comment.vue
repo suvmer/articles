@@ -5,9 +5,9 @@
         variant="outlined"
     >
         <template v-slot:title>
-            <v-list-item-title class="text-wrap">{{ !isEdit ? comment.body : "" }}</v-list-item-title>
+            <v-list-item-title class="text-wrap">{{ !isEditing ? newComment.body : "" }}</v-list-item-title>
             <v-textarea
-                v-if="isEdit"
+                v-if="isEditing"
                 v-model="newComment.body"
                 label="Текст комментария"
             />
@@ -20,8 +20,8 @@
             <v-icon size="x-large">mdi-account-circle</v-icon>
         </template>
         <template v-slot:append>
-            <v-icon v-if="!isEdit" @click="isEdit = true">mdi-pencil</v-icon>
-            <v-icon v-else @click="isEdit = false; editComment()">mdi-check-bold</v-icon>
+            <v-icon v-if="!isEditing" @click="isEditing = true">mdi-pencil</v-icon>
+            <v-icon v-else @click="isEditing = false; editComment()">mdi-check-bold</v-icon>
         </template>
     </v-list-item>
     
@@ -34,15 +34,10 @@ export default {
         comment: {
             type: Object,
             required: true
-        },
-        isEdit: {
-            type: Boolean,
-            default: false
         }
     },
     mounted() {
         this.newComment = this.comment;
-        this.isEditing = this.isEdit;
     },
     data: () => ({
         newComment: {},
@@ -51,9 +46,8 @@ export default {
     methods: {
         toDMY: (timestamp) => toDMY(timestamp),
         editComment() {
-            console.log(this.newComment)
             this.newComment = {...this.newComment, updatedAt: Date.now().valueOf()}
-            this.$parent.$parent.$parent.$emit('editComment', this.newComment)
+            this.$store.dispatch('editComment', this.newComment)
         }
     }
 }
