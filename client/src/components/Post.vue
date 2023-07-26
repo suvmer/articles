@@ -105,7 +105,7 @@ export default {
                 this.$router.back();
         },
         getTimeCreated(post) {
-            return `${toDMY(post.createdAt)}${post.createdAt != newPost.updatedAt ? ` (Изменён: ${toDMY(newPost.updatedAt)})` : ``}`;
+            return `${toDMY(post.createdAt)}${post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``}`;
         }
     }
 }
