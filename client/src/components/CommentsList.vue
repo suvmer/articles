@@ -30,7 +30,6 @@
 <script>
 import Post from './Post'
 import Comment from './Comment';
-const {toDMY} = require('../utils');
 export default {
     components: {
         Post, Comment
@@ -61,9 +60,6 @@ export default {
                 return {prev: cur.post_id, comments: acc.comments.map((el, ind) => ind == acc.comments.length - 1 ? [...el, cur] : el)}
             }, {prev: null, comments: []}).comments;
         }
-    },
-    methods: {
-        toDMY: (timestamp) => toDMY(timestamp),
     }
 }
 </script>
