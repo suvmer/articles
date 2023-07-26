@@ -13,6 +13,14 @@ const routes = [
         name: "Комментарии",
         path: '/comments',
         component:  Comments,
+        props: (route) => {
+            const res = {};
+            if(route.query.dateFrom)
+                res.dateFrom = +route.query.dateFrom;
+            if(route.query.dateTo)
+                res.dateTo = +route.query.dateTo;
+            return res;
+        }
     },
     {
         name: "Статья",

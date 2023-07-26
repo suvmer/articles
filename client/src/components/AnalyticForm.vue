@@ -2,15 +2,17 @@
     <v-card title="Анализ комментариев" class="pa-2 overflow-visible" style="z-index: 10;">
         <VueDatePicker
             locale="ru"
-            :enable-time-picker="false"
+            :enable-time-picker="true"
             :auto-apply="true"
             :close-on-auto-apply="false"
             placeholder="Выберите отрезок времени"
             select-text="Выбрать"
             cancel-text="Отмена"
-            v-model="dates"
-            range week-start="1"
+            v-model="newDates"
+            range
+            week-start="1"
             format="dd/MM/yyyy"
+            :start-time="startTime"
             @update:model-value="handleDate"
         />
     </v-card>
@@ -24,12 +26,21 @@ export default {
     components: {
         VueDatePicker
     },
+    props: {
+        dates: {
+            default: [new Date(Date.now().valueOf() - 30*24*60*60*1000), Date.now()]
+        }
+    },
     data: () => ({
-        dates: [new Date(Date.now().valueOf() - 30*24*60*60*1000), Date.now()]
+        newDates: [],
+        startTime: {hours: 5, minutes: 0}
     }),
+    mounted() {
+        this.newDates = this.dates
+    },
     methods: {
         handleDate(newValue) {
-            this.dates = newValue;
+            this.newDates = newValue;
             this.$emit('selectDates', newValue);
         }
     }
