@@ -10,10 +10,14 @@
         <v-list-item-title class="text-h5"><a href="#">#ВСтатье</a></v-list-item-title>
         <v-list-item-subtitle>Статьи и многое другое</v-list-item-subtitle>
     </v-list-item>
-    <v-divider></v-divider>
+    <v-divider/>
     <v-list>
-        <router-link class="text-decoration-none on-surface" v-slot="{isActive}" to="/"><v-list-item :active="isActive" title="Список статей" prepend-icon="mdi-view-dashboard" link/></router-link>
-        <router-link class="text-decoration-none on-surface" v-slot="{isActive}" to="/comments"><v-list-item :active="isActive" title="Комментарии" prepend-icon="mdi-comment-multiple-outline" link/></router-link>
+        <router-link class="text-decoration-none on-surface" v-slot="{isActive}" to="/">
+          <v-list-item :active="isActive" title="Список статей" prepend-icon="mdi-view-dashboard" link/>
+        </router-link>
+        <router-link class="text-decoration-none on-surface" v-slot="{isActive}" to="/comments">
+          <v-list-item :active="isActive" title="Комментарии" prepend-icon="mdi-comment-multiple-outline" link/>
+        </router-link>
         <v-btn block class="mx-1 mt-2" min-width="auto" href="https://github.com/suvmer/articles" target="_BLANK" prepend-icon="mdi-github">
             GitHub
         </v-btn>
@@ -21,7 +25,7 @@
     
     </v-navigation-drawer>
     <v-main>
-        <v-list v-if="(['/', '/comments'].findIndex(el => el == this.$router.currentRoute.value.path) == -1)" max-width="700" height="auto" class="py-3 mx-auto overflow-visible">
+        <v-list v-if="showBackArrow" max-width="700" height="auto" class="py-3 mx-auto overflow-visible">
           <v-icon @click="this.$router.back()" size="x-large">mdi-arrow-left</v-icon>
         </v-list>
         <RouterView/>
@@ -38,7 +42,11 @@ export default {
   components: {
     PostForm, PostList
   },
-
+  computed: {
+    showBackArrow() {
+      return ['/', '/comments'].findIndex(el => el == this.$router.currentRoute.value.path) == -1;
+    }
+  },
   data: () => ({
     drawer: window.innerWidth >= 1280
   }),
