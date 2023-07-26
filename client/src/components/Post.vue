@@ -3,7 +3,7 @@
         <v-card
             class="mx-auto my-2"
             :key="post.id"
-            :to='(isEditing || (expanded && showCommentsForm)) ? "" : "/post/"+post.id'
+            :to='showLink ? "" : "/post/"+post.id'
         >
             <template v-slot:title>
                 <v-card-title :class="expanded ? 'text-wrap' : ''">{{ !isEditing ? newPost.title : "" }}</v-card-title>
@@ -20,7 +20,7 @@
             <template v-slot:append>
                 <v-icon v-if="!isEditing" @click="$event.preventDefault(); isEditing = true">mdi-pencil</v-icon>
                 <v-icon v-else @click="isEditing = false; editPost()">mdi-check-bold</v-icon>
-                <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deletePost', this.newPost); if(expanded) this.$router.back();"/>
+                <DeleteIcon class="ms-2" @onDelete="deletePost"/>
             </template>
 
             <v-card-text style="line-height: 1.7rem;" class="text-h5 py-2 ">
@@ -38,13 +38,13 @@
                     <span class="subheading me-2">{{post.comments.length}}</span>
                     <template v-slot:append>
                         <div class="justify-self-end">
-                            <v-list-item-subtitle>{{toDMY(post.createdAt)}}{{newPost.createdAt != newPost.updatedAt ? ` (Изменён: ${toDMY(newPost.updatedAt)})` : ''}}</v-list-item-subtitle>
+                            <v-list-item-subtitle>{{getTimeCreated(newPost)}}</v-list-item-subtitle>
                         </div>
                     </template>
                 </v-list-item>
             </v-card-actions>
         </v-card>
-        <CommentForm class="mt-10" v-if="(expanded && showCommentsForm)" v-bind:post_id="post.id"/>
+        <CommentForm class="mt-10" v-if="commentFormShowing" v-bind:post_id="post.id"/>
         <CommentsList class="mt-2" v-if="expanded" :noCommentTitle="noCommentTitle" v-bind:comments="post.comments"/>
     </div>
 </template>
@@ -59,6 +59,14 @@ export default {
     },
     beforeCreate() { //HACK to avoid circular dependency
        this.$options.components.CommentsList = require('./CommentsList').default
+    },
+    computed: {
+        showLink() {
+            return (this.isEditing || this.commentFormShowing);
+        },
+        commentFormShowing() {
+            return (this.expanded && this.showCommentsForm);
+        }
     },
     props: {
         post: {
@@ -90,6 +98,14 @@ export default {
         editPost() {
             this.newPost = {...this.newPost, updatedAt: Date.now().valueOf()}
             this.$store.dispatch('editPost', this.newPost)
+        },
+        deletePost() {
+            this.$store.dispatch('deletePost', this.newPost);
+            if(this.showLink)
+                this.$router.back();
+        },
+        getTimeCreated(post) {
+            return `${toDMY(post.createdAt)}${post.createdAt != newPost.updatedAt ? ` (Изменён: ${toDMY(newPost.updatedAt)})` : ``}`;
         }
     }
 }
