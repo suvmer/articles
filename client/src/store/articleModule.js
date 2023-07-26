@@ -31,24 +31,24 @@ export const articleModule = {
     actions: {
         async fetchPost({state, commit}, id) {
             try {
-                commit("setLoading", true);
+                commit('setLoading', true);
                 const response = await axios.get(`http://192.168.1.134:8000/article/${id}`)
                 commit("setPostToShow", response.data.post);
             } catch(e) {
                 console.log(e);
             } finally {
-                commit("setLoading", false);
+                commit('setLoading', false);
             }
         },
         async fetchPosts({state, commit}) {
             try {
-                commit('setLoading', true);
+                if(!state.posts.length) commit("setLoading", true); //do not show loading when posts is already loaded(silent update)
                 const response = await axios.get('http://192.168.1.134:8000/articles')
                 commit('setPosts', response.data.posts);
             } catch(e) {
                 console.log(e);
             } finally {
-                commit('setLoading', false);
+                commit("setLoading", false);
             }
         },
         async editPost({state, commit}, post) {
