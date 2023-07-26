@@ -19,7 +19,7 @@ export const commentsModule = {
     actions: {
         async editComment({state, commit}, comment) {
           try {
-              await axios.patch(`http://192.168.1.134:8000/article/${comment.post_id}/comment/${comment.id}`, {...comment})
+              await axios.patch(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment/${comment.id}`, {...comment})
           } catch(e) {
               console.log(e);
               if(e.response?.data?.message)
@@ -28,7 +28,7 @@ export const commentsModule = {
         },
         async deleteComment({state, commit}, comment) {
             try {
-                await axios.delete(`http://192.168.1.134:8000/article/${comment.post_id}/comment/${comment.id}/`)
+                await axios.delete(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment/${comment.id}/`)
                 commit('removeComment', comment.id)
             } catch(e) {
                 console.log(e);
@@ -39,8 +39,7 @@ export const commentsModule = {
           
         async createComment({state, commit}, comment) {
             try {
-                const response = await axios.post(`http://192.168.1.134:8000/article/${comment.post_id}/comment`, {...comment})
-                console.log(response)
+                const response = await axios.post(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment`, {...comment})
                 commit('addComment', response.data.comment);
             } catch(e) {
                 console.log(e);
@@ -52,7 +51,7 @@ export const commentsModule = {
         async fetchCommentsAnalytics({state, commit}, {dateFrom, dateTo}) {
             try {
                 if(!state.commentStats.length) commit('setLoading', true);
-                const response = await axios.get('http://192.168.1.134:8000/analytic/comments', {params: {dateFrom: normalizeDate(new Date(dateFrom)).valueOf(), dateTo: normalizeDate(new Date(dateTo + 1000*60*60*24)).valueOf()}});
+                const response = await axios.get(`${process.env.VUE_APP_API_URL}/analytic/comments`, {params: {dateFrom: normalizeDate(new Date(dateFrom)).valueOf(), dateTo: normalizeDate(new Date(dateTo + 1000*60*60*24)).valueOf()}});
                 commit('setCommentStats', response.data.comments);
             } catch(e) {
                 console.log(e);

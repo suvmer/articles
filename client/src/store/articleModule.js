@@ -32,7 +32,7 @@ export const articleModule = {
         async fetchPost({state, commit}, id) {
             try {
                 if(!state.postToShow) commit('setLoading', true);
-                const response = await axios.get(`http://192.168.1.134:8000/article/${id}`)
+                const response = await axios.get(`${process.env.VUE_APP_API_URL}/article/${id}`)
                 commit("setPostToShow", response.data.post);
             } catch(e) {
                 console.log(e);
@@ -43,7 +43,7 @@ export const articleModule = {
         async fetchPosts({state, commit}) {
             try {
                 if(!state.posts.length) commit("setLoading", true); //do not show loading when posts is already loaded(silent update)
-                const response = await axios.get('http://192.168.1.134:8000/articles')
+                const response = await axios.get(`${process.env.VUE_APP_API_URL}/articles`)
                 commit('setPosts', response.data.posts);
             } catch(e) {
                 console.log(e);
@@ -53,7 +53,7 @@ export const articleModule = {
         },
         async editPost({state, commit}, post) {
           try {
-              await axios.patch(`http://192.168.1.134:8000/article/${post.id}/`, {...post})
+              await axios.patch(`${process.env.VUE_APP_API_URL}/article/${post.id}/`, {...post})
           } catch(e) {
               console.log(e);
               if(e.response?.data?.message)
@@ -62,7 +62,7 @@ export const articleModule = {
         },
         async deletePost({state, commit}, post) {
           try {
-              await axios.delete(`http://192.168.1.134:8000/article/${post.id}/`)
+              await axios.delete(`${process.env.VUE_APP_API_URL}/article/${post.id}/`)
               commit('removePost', post.id)
               commit('deleteCommentPost', post)
           } catch(e) {
@@ -74,7 +74,7 @@ export const articleModule = {
         async createPost({state, commit}, post) {
             try {
                 commit('setLoading', true);
-                const response = await axios.post('http://192.168.1.134:8000/article', {...post})
+                const response = await axios.post(`${process.env.VUE_APP_API_URL}/article`, {...post})
                 commit('setPosts',  [response.data.post, ...state.posts]);
             } catch(e) {
                 console.log(e);
