@@ -62,9 +62,6 @@ export default {
             }, {prev: null, comments: []}).comments;
         }
     },
-    mounted() {
-        
-    },
     methods: {
         toDMY: (timestamp) => toDMY(timestamp),
     }
