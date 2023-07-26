@@ -21,7 +21,7 @@
         <template v-slot:append>
             <v-icon v-if="!isEditing" @click="isEditing = true">mdi-pencil</v-icon>
             <v-icon v-else @click="isEditing = false; editComment()">mdi-check-bold</v-icon>
-            <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deleteComment', newComment);"/>
+            <DeleteIcon class="ms-2" @onDelete="deleteComment"/>
         </template>
     </v-list-item>
 </template>
@@ -51,6 +51,9 @@ export default {
         editComment() {
             this.newComment = {...this.newComment, updatedAt: Date.now().valueOf()}
             this.$store.dispatch('editComment', this.newComment)
+        },
+        deleteComment() {
+            this.$store.dispatch('deleteComment', this.newComment);
         }
     }
 }
