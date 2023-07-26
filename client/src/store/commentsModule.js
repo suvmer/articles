@@ -11,6 +11,9 @@ export const commentsModule = {
     mutations: {
         setCommentStats(state, comments) {
             state.commentStats = comments;
+        },
+        deleteCommentPost(state, post) {
+            state.commentStats = state.commentStats.filter(comment => comment.post_id != post.id);
         }
     },
     actions: {

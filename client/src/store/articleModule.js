@@ -64,6 +64,7 @@ export const articleModule = {
           try {
               await axios.delete(`http://192.168.1.134:8000/article/${post.id}/`)
               commit('removePost', post.id)
+              commit('deleteCommentPost', post)
           } catch(e) {
               console.log(e);
               if(e.response?.data?.message)
