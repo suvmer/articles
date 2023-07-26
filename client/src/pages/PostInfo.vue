@@ -1,23 +1,20 @@
 <template>
-    <v-main>
-        <v-list max-width="700" class="pa-1 mx-auto">
-            <Post v-if="getPost != null" :expanded="true" v-bind:post="getPost"/>
-            <v-overlay
-                :model-value="this.$store.state.ui.isLoading"
-                class="align-center justify-center"
-            >
-                <v-progress-circular
-                color="primary"
-                indeterminate
-                size="64"
-                ></v-progress-circular>
-            </v-overlay>
-        </v-list>
-    </v-main>
-  </template>
+    <v-list max-width="700" class="pa-1 mx-auto">
+        <Post v-if="getPost != null" :expanded="true" v-bind:post="getPost"/>
+        <v-overlay
+            :model-value="this.$store.state.ui.isLoading"
+            class="align-center justify-center"
+        >
+            <v-progress-circular
+            color="primary"
+            indeterminate
+            size="64"
+            ></v-progress-circular>
+        </v-overlay>
+    </v-list>
+</template>
   
   <script>
-  import axios from "axios";
   import Post from "../components/Post";
   
   export default {

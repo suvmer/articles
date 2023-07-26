@@ -20,7 +20,12 @@
     </v-list>
     
     </v-navigation-drawer>
-    <RouterView/>
+    <v-main>
+        <v-list v-if="(['/', '/comments'].findIndex(el => el == this.$router.currentRoute.value.path) == -1)" max-width="700" height="auto" class="py-3 mx-auto overflow-visible">
+          <v-icon @click="this.$router.back()" size="x-large">mdi-arrow-left</v-icon>
+        </v-list>
+        <RouterView/>
+    </v-main>
   </v-app>
 </template>
 
