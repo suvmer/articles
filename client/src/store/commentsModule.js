@@ -1,3 +1,4 @@
+import { normalizeDate } from "@/utils";
 import axios from "axios";
 
 export const commentsModule = {
@@ -43,6 +44,18 @@ export const commentsModule = {
                 if(e.response.data?.message)
                     alert(e.response.data?.message)
             }
-        }
+        },
+
+        async fetchCommentsAnalytics({state, commit}, {dateFrom, dateTo}) {
+            try {
+                if(!state.commentStats.length) commit('setLoading', true);
+                const response = await axios.get('http://192.168.1.134:8000/analytic/comments', {params: {dateFrom: normalizeDate(new Date(dateFrom)).valueOf(), dateTo: normalizeDate(new Date(dateTo + 1000*60*60*24)).valueOf()}});
+                commit('setCommentStats', response.data.comments);
+            } catch(e) {
+                console.log(e);
+            } finally {
+                commit('setLoading', false);
+            }
+          },
     }
 }

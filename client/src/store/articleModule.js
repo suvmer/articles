@@ -31,7 +31,7 @@ export const articleModule = {
     actions: {
         async fetchPost({state, commit}, id) {
             try {
-                commit('setLoading', true);
+                if(!state.postToShow) commit('setLoading', true);
                 const response = await axios.get(`http://192.168.1.134:8000/article/${id}`)
                 commit("setPostToShow", response.data.post);
             } catch(e) {
