@@ -2,16 +2,16 @@
   <v-list max-width="700" class="pa-1 mx-auto overflow-visible">
     <AnalyticForm v-bind:dates="[dateFrom, dateTo]" @selectDates="selectDates"/>
     <CommentsList :showCommentsForm="false" :expanded="true" :groupped="true" v-bind:comments="this.$store.state.comment.commentStats"/>
-      <v-overlay
-          :model-value="this.$store.state.ui.isLoading"
-          class="align-center justify-center"
-      >
-          <v-progress-circular
-          color="primary"
-          indeterminate
-          size="64"
-          ></v-progress-circular>
-      </v-overlay>
+    <v-overlay
+      :model-value="this.$store.state.ui.isLoading"
+      class="align-center justify-center"
+    >
+    <v-progress-circular
+      color="primary"
+      indeterminate
+      size="64"
+    />
+    </v-overlay>
   </v-list>
   </template>
   
