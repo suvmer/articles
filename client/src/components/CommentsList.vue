@@ -13,7 +13,7 @@
             v-if="groupped"
             v-for="comments in commentsGroups"
             v-bind:post="{...comments[0].Post, comments: comments}"
-            :key="comments[0].Post.CreatedAt"
+            :key="comments[0].Post.id"
             :expanded="true"
             :noCommentTitle="true"
             :showCommentsForm="showCommentsForm"
