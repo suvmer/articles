@@ -21,7 +21,7 @@
         <template v-slot:append>
             <v-icon v-if="!isEditing" @click="isEditing = true">mdi-pencil</v-icon>
             <v-icon v-else @click="isEditing = false; editComment()">mdi-check-bold</v-icon>
-            <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deleteComment', newComment); /*this.$router.back();*/"/>
+            <DeleteIcon class="ms-2" @onDelete="this.$store.dispatch('deleteComment', newComment);"/>
         </template>
     </v-list-item>
 </template>
