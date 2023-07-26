@@ -2,7 +2,7 @@
     <v-card title="Анализ комментариев" class="pa-2 overflow-visible" style="z-index: 10;">
         <VueDatePicker
             locale="ru"
-            :enable-time-picker="true"
+            :enable-time-picker="false"
             :auto-apply="true"
             :close-on-auto-apply="false"
             placeholder="Выберите отрезок времени"
@@ -12,7 +12,6 @@
             range
             week-start="1"
             format="dd/MM/yyyy"
-            :start-time="startTime"
             @update:model-value="handleDate"
         />
     </v-card>
@@ -32,8 +31,7 @@ export default {
         }
     },
     data: () => ({
-        newDates: [],
-        startTime: {hours: 5, minutes: 0}
+        newDates: []
     }),
     mounted() {
         this.newDates = this.dates
