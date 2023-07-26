@@ -1,13 +1,15 @@
 # articles
 A simple full-stack application created as a test task. (CRUD posts, comments, analytics)
 
-# Как подготовить БД перед запуском:
+# Как подготовить проект перед запуском:
 1. Указать данные для подключения к БД в ~/server/config/config.js
 2. Выполнить миграции и сиды(находясь в папке server):
 ```
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
+3. Указать адрес сервера API_URL в client/.env
+
 
 # Описание задания: Статьи
 
