@@ -5,9 +5,10 @@ import { mdiDelete, mdiDeleteSweep, mdiDeleteAlert } from '@mdi/js';
 interface IconButtonProps {
     onClick: () => void,
     toDelete?: boolean,
-    iconPath?: string
+    iconPath?: string,
+    className?: string
 }
-export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconPath = mdiDelete}:IconButtonProps) => {
+export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconPath = mdiDelete, className=""}:IconButtonProps) => {
     const [stage, setStage] = useState<number>(0);
     return  <button
                 onClick={(e) => {
@@ -16,10 +17,10 @@ export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconP
                         return setStage(stage+1)
                     onClick()
                 }}
-                className='IconButton'>
+                className={'IconButton '+className}>
         <Icon
             path={toDelete ? [mdiDelete, mdiDeleteSweep, mdiDeleteAlert][stage] : iconPath}
-            size={1.3}
+            size={1}
         />
     </button>
 }

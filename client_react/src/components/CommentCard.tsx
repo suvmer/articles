@@ -29,7 +29,7 @@ export const CommentCard:FC<CommentProps> = ({comment, ...props} : CommentProps)
                 {!isEditing ? <>
                 <div className='card__title'>
                     <Icon className='pr-4' path={mdiAccountCircle} size={1.3}/>
-                    <p className='card__body'>{editedComment.body}</p>
+                    <p className='card__body card_expanded'>{editedComment.body}</p>
                 </div>
                 </> : <CommentForm post_id={comment.post_id} defaultValue={editedComment} onClose={updateComment} editing/>}                
             </div>
@@ -48,6 +48,7 @@ export const CommentCard:FC<CommentProps> = ({comment, ...props} : CommentProps)
                     />}
                 <IconButton
                     toDelete
+                    className="ml-2"
                     onClick={() => {
                         dispatch(deleteComment(editedComment))
                     }}

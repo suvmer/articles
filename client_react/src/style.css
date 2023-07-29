@@ -44,15 +44,26 @@ html {
     flex-direction: column;
     gap: 10px;
     width: 300px;
+    padding: 15px 15px;
+    font-weight: 600;
     flex-shrink: 0;
+    background-color: white;
+    box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-top: -20px;
 }
 .navigationButton {
-    padding: 10px;
-    border: 2px solid black;
+    padding: 20px 10px;
     display: flex;
     justify-content: space-around;
     color: var(--on-surface);
+    border-radius: 4px;
 }
+.navigationButton:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    transition: background-color 100ms linear;
+}
+
 
 .main {
     padding: 80px 50px;
@@ -100,6 +111,9 @@ html {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+.card_expanded {
+    white-space: wrap!important;
 }
 .card__body {
     font-size: 1.2rem;
@@ -170,4 +184,7 @@ html {
 .my-2 {
     margin-top: 8px;
     margin-bottom: 8px;
+}
+.ml-2 {
+    margin-left: 8px;
 }
