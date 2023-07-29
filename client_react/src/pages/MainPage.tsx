@@ -4,6 +4,8 @@ import { fetchPosts } from "../store/action-creators/post"
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useNavigate } from 'react-router';
 import '../style.css';
+import { PostCard } from '../components/PostCard';
+import { PostList } from '../components/PostList';
 
 export const MainPage : FC = () => {
     const dispatch = useAppDispatch();
@@ -12,9 +14,7 @@ export const MainPage : FC = () => {
     const {loading, posts} = useTypedSelector(state => state.posts);
     const postList = loading ?
         "Загрузка" :
-        posts.map(post => <div key={post.id} onClick={() => navigate(`post/${post.id}`)} className='card card_link'>
-            <p className='card__title'>{post.title}</p>
-            <p className='card__body'>{post.body}</p>
-        </div>);
+        <PostList posts={posts}/>
+        //posts.map(post => <PostCard post={post}></PostCard>);
     return <div>Main page<div>{postList}</div></div>
 }

@@ -3,9 +3,11 @@ html {
 }
 .card {
     padding: 10px;
-    margin: 10px;
     border: 1px solid black;
     display: flow-root;
+}
+.card__wrapper {
+
 }
 .card__title {
     font-size: 1.25rem;
@@ -19,4 +21,11 @@ html {
 .card_link {
     cursor: pointer;
     text-decoration: none;
+}
+
+.mt-2 {
+    margin-top: 8px;
+}
+.mt-4 {
+    margin-top: 16px;
 }
