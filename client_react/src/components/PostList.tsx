@@ -5,5 +5,7 @@ interface PostListProps {
     posts: Post[]
 }
 export const PostList:FC<PostListProps> = ({posts}: PostListProps) => {
-    return <div>{posts.map(post => <PostCard key={post.id} post={post} className='mt-2'/>)}</div>;
+    return <div className='list'>
+        {posts.map(post => <PostCard key={post.id} post={post} className='mt-2'/>)}
+    </div>;
 }

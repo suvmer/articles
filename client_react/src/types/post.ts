@@ -33,14 +33,29 @@ export interface PostFetchResolveAction {
     type: string,
     payload: Post;
 }
-export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|PostFetchResolveAction;
+export interface AddPostAction {
+    type: string,
+    payload: Post;
+}
+export interface EditPostAction {
+    type: string,
+    payload: Post;
+}
+export interface DeletePostAction {
+    type: string,
+    payload: Post;
+}
+
+export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|PostFetchResolveAction|AddPostAction|EditPostAction|DeletePostAction;
 
 export enum PostActionTypes {
     FETCH_DATA = 'FETCH_DATA',
     FETCH_ERROR = 'FETCH_ERROR',
     FETCH_POSTS_RESOLVE = 'FETCH_POSTS_RESOLVE',
     FETCH_POST_RESOLVE = 'FETCH_POST_RESOLVE',
-    ADD_POST = 'ADD_POST'
+    ADD_POST = 'ADD_POST',
+    EDIT_POST = 'EDIT_POST',
+    DELETE_POST = 'DELETE_POST'
 }
 
 export type PostPageParams = {

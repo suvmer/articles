@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { PostAction, PostActionTypes, PostFormValue } from "../../types/post"
+import { Post, PostAction, PostActionTypes, PostFormValue } from "../../types/post"
 import axios from "axios";
 
 export const fetchPosts = () => {
@@ -28,8 +28,32 @@ export const addPost = (post:PostFormValue) => {
     return async (dispatch: Dispatch<PostAction>) => {
         try {
             dispatch({type: PostActionTypes.FETCH_DATA});
-            const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/article`);
+            const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/article`, {...post});
             dispatch({type: PostActionTypes.ADD_POST, payload: response.data.post});
+        } catch(e:any) {
+            console.log(typeof e)
+            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
+        }
+    }
+}
+export const editPost = (post:Post) => {
+    return async (dispatch: Dispatch<PostAction>) => {
+        try {
+            dispatch({type: PostActionTypes.FETCH_DATA});
+            const response = await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`, {...post});
+            dispatch({type: PostActionTypes.EDIT_POST, payload: response.data.post});
+        } catch(e:any) {
+            console.log(typeof e)
+            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
+        }
+    }
+}
+export const deletePost = (post:Post) => {
+    return async (dispatch: Dispatch<PostAction>) => {
+        try {
+            dispatch({type: PostActionTypes.FETCH_DATA});
+            await axios.delete(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`);
+            dispatch({type: PostActionTypes.DELETE_POST, payload: post});
         } catch(e:any) {
             console.log(typeof e)
             dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});

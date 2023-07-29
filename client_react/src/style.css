@@ -4,6 +4,12 @@
     padding: 0;
     text-decoration: none;
 }
+button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
 html {
     font-family: "Roboto", sans-serif;
     letter-spacing: 0.0125rem;
@@ -15,6 +21,7 @@ html {
     --on-surface: rgba(0, 0, 0, 1);
 }
 .list {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -51,13 +58,14 @@ html {
     display: flex;
     gap: 50px;
 }
+.card__wrapper {
+    width: 100%;
+}
 .card {
     padding: 10px;
     border: 1px solid black;
-    display: flow-root;
-}
-.card__wrapper {
-
+    display: flex;
+    gap: 10px;
 }
 .card__title {
     font-size: 1.25rem;
@@ -66,6 +74,9 @@ html {
 }
 .card__body {
     font-size: 1.2rem;
+    flex-grow: 1;
+}
+.card__append {
 }
 
 .card_link {
