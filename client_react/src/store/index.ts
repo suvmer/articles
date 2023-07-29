@@ -1,9 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { postReducer } from "./reducers/postReducer";
+import { commentReducer } from "./reducers/commentReducer";
 import thunk from "redux-thunk"
 
 const rootReducer = combineReducers({
-  posts: postReducer
+  posts: postReducer,
+  comments: commentReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
