@@ -67,6 +67,9 @@ html {
     display: flex;
     gap: 10px;
 }
+.card__container {
+    flex-grow: 1;
+}
 .card__title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -74,9 +77,9 @@ html {
 }
 .card__body {
     font-size: 1.2rem;
-    flex-grow: 1;
 }
 .card__append {
+    flex-shrink: 0;
 }
 
 .card_link {

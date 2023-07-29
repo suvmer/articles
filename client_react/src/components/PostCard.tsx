@@ -23,8 +23,10 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
     const disableLink = isEditing || showComments;
     return <div className={`card__wrapper ${props.className ?? ''}`}>
         <div onClick={() => !disableLink && navigate(`/post/${post.id}`)} className={`card${!disableLink ? ' card_link' : ''}`}>
-            <p className='card__title'>{post.title}</p>
-            <p className='card__body'>{post.body}</p>
+            <div className='card__container'>
+                <p className='card__title'>{post.title}</p>
+                <p className='card__body mt-4'>{post.body}</p>
+            </div>
             <div className='card__append'>
                 <Icon path={mdiPencil} size={1}/>
                 <DeleteButton
