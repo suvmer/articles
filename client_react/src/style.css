@@ -1,10 +1,60 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
 html {
     font-family: "Roboto", sans-serif;
+    letter-spacing: 0.0125rem;
+    color: var(--on-surface);
+}
+:root {
+    --primary: rgba(98, 0, 238, 1);
+    --on-primary: rgba(255, 255, 255, 1);
+    --on-surface: rgba(0, 0, 0, 1);
 }
 .card {
     padding: 10px;
     border: 1px solid black;
     display: flow-root;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.list__title {
+    padding: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.header {
+    position: fixed;
+    width: 100%;
+    padding: 15px 30px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    flex-shrink: 0;
+}
+.navigationButton {
+    padding: 10px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-around;
+    color: var(--on-surface);
+}
+
+.main {
+    padding: 60px 60px ;
+    display: flex;
+    gap: 50px;
 }
 .card__wrapper {
 

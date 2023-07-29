@@ -8,16 +8,23 @@ import {
 import { MainPage } from './pages/MainPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { PostPage } from './pages/PostPage';
+import { Index } from './pages/Index';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainPage />,
+    element: <Index/>,
     errorElement: <ErrorPage/>,
-  },
-  {
-    path: "/post/:id",
-    element: <PostPage/>
+    children: [
+      {
+        path: "/",
+        element: <MainPage/>
+      },
+      {
+        path: "/post/:id",
+        element: <PostPage/>
+      }
+    ]
   }
 ]);
 
