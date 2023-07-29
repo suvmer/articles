@@ -48,7 +48,6 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                     <IconButton
                         onClick={() => {
                             setEditing(false)
-                            //dispatch(editPost(post))
                         }}
                         iconPath={mdiCheck}
                     />}
@@ -67,7 +66,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                 />
             </div>
         </div>
-        {showCommentsForm ? MemoCommentForm : ""}
+        {showComments ? MemoCommentForm : ""}
         {expanded ? <CommentList showTitle={expanded && showTitle} comments={post.comments} /> : ""}
     </div>
 }

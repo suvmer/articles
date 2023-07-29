@@ -30,6 +30,7 @@ export const addComment = (comment:CommentFormValue) => {
 export const editComment = (comment:Comment) => {
     return async (dispatch: Dispatch<CommentAction>) => {
         try {
+            console.log(comment)
             dispatch({type: CommentActionTypes.FETCH_DATA});
             const response = await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${comment.post_id}/comment/${comment.id}`, {...comment});
             dispatch({type: CommentActionTypes.EDIT_COMMENT, payload: comment});
@@ -43,8 +44,9 @@ export const deleteComment = (comment:Comment) => {
     return async (dispatch: Dispatch<CommentAction>) => {
         try {
             dispatch({type: CommentActionTypes.FETCH_DATA});
-            await axios.delete(process.env.REACT_APP_SERVER_URL+`/article/${comment.id}`);
+            await axios.delete(process.env.REACT_APP_SERVER_URL+`/article/${comment.post_id}/comment/${comment.id}`);
             dispatch({type: CommentActionTypes.DELETE_COMMENT, payload: comment});
+            dispatch({type: PostActionTypes.REMOVE_COMMENT, payload: comment});
         } catch(e:any) {
             console.log(typeof e)
             dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});

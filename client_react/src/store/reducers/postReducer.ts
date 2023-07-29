@@ -19,12 +19,6 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
             return {...state, loading: false, postToShow: (action as PostFetchResolveAction).payload};
         case PostActionTypes.ADD_POST:
             return {...state, loading: false, posts: [(action as AddPostAction).payload, ...state.posts]};
-        case PostActionTypes.APPEND_COMMENT:
-            const newComment = (action as AppendCommentAction).payload;
-            console.log(state, newComment)
-            if(!state.postToShow)
-                return {...state};
-            return {...state, loading: false, postToShow: {...state.postToShow, comments: [newComment, ...state.postToShow.comments]}};
         case PostActionTypes.EDIT_POST:
             const newPost = (action as EditPostAction).payload;
             return {...state, loading: false, posts: state.posts.map(post => {
@@ -34,6 +28,16 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
             })};
         case PostActionTypes.DELETE_POST:
             return {...state, loading: false, posts: state.posts.filter(post => post.id !== (action as DeletePostAction).payload.id)};
+        case PostActionTypes.APPEND_COMMENT:
+            const newComment = (action as AppendCommentAction).payload;
+            if(!state.postToShow)
+                return {...state};
+            return {...state, loading: false, postToShow: {...state.postToShow, comments: [newComment, ...state.postToShow.comments]}};
+        case PostActionTypes.REMOVE_COMMENT:
+            const deleteComment = (action as AppendCommentAction).payload;
+            if(!state.postToShow)
+                return {...state};
+            return {...state, loading: false, postToShow: {...state.postToShow, comments: state.postToShow.comments.filter(comment => comment.id != deleteComment.id)}};
         default:
             return state;        
     }
