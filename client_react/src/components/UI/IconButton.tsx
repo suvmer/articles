@@ -19,7 +19,7 @@ export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconP
                 className='IconButton'>
         <Icon
             path={toDelete ? [mdiDelete, mdiDeleteSweep, mdiDeleteAlert][stage] : iconPath}
-            size={1}
+            size={1.3}
         />
     </button>
 }
