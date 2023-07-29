@@ -13,6 +13,5 @@ export const PostPage : FC = () => {
     useEffect(() => {
         dispatch(fetchPost(Number(id)));
     }, []);
-    const post = (loading && !postToShow) ? "Загрузка" : postToShow ? <PostCard expanded post={postToShow}/> : "Пост не найден";
-    return <div>{post}</div>
+    return ((loading && !postToShow) ? <p>"Загрузка"</p> : postToShow ? <PostCard expanded post={postToShow}/> : <p>"Пост не найден"</p>);
 }
