@@ -14,11 +14,6 @@ html {
     --on-primary: rgba(255, 255, 255, 1);
     --on-surface: rgba(0, 0, 0, 1);
 }
-.card {
-    padding: 10px;
-    border: 1px solid black;
-    display: flow-root;
-}
 .list {
     display: flex;
     flex-direction: column;
@@ -56,6 +51,11 @@ html {
     display: flex;
     gap: 50px;
 }
+.card {
+    padding: 10px;
+    border: 1px solid black;
+    display: flow-root;
+}
 .card__wrapper {
 
 }
@@ -71,6 +71,28 @@ html {
 .card_link {
     cursor: pointer;
     text-decoration: none;
+}
+.postForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.postForm > input, .postForm > textarea {
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: rgba(0, 0, 0, 0.04);
+    flex-wrap: wrap;
+    letter-spacing: 0.009375em;
+    opacity: 0.87;
+    min-height: 56px;
+    padding-inline-start: 15px;
+    padding-inline-end: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    width: 100%;
+    font-size: 1rem;
+    outline: none;
 }
 
 .mt-2 {
