@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { PostAction, PostActionTypes } from "../../types/post"
+import { PostAction, PostActionTypes, PostFormValue } from "../../types/post"
 import axios from "axios";
 
 export const fetchPosts = () => {
@@ -21,6 +21,18 @@ export const fetchPost = (id:number) => {
             dispatch({type: PostActionTypes.FETCH_POST_RESOLVE, payload: response.data.post});
         } catch {
             dispatch({type: PostActionTypes.FETCH_POST_RESOLVE});
+        }
+    }
+}
+export const addPost = (post:PostFormValue) => {
+    return async (dispatch: Dispatch<PostAction>) => {
+        try {
+            dispatch({type: PostActionTypes.FETCH_DATA});
+            const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/article`);
+            dispatch({type: PostActionTypes.ADD_POST, payload: response.data.post});
+        } catch(e:any) {
+            console.log(typeof e)
+            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
         }
     }
 }
