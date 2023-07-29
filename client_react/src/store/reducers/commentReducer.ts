@@ -1,33 +1,30 @@
-import { AddPostAction, DeletePostAction, EditPostAction, FETCH_ERROR, FetchPostsResolveAction, PostAction, PostActionTypes, PostFetchResolveAction, PostState } from "../../types/post";
+import { AddCommentAction, CommentAction, CommentActionTypes, CommentState, DeleteCommentAction, EditCommentAction, FETCH_ERROR, FetchCommentsResolveAction } from "../../types/comment";
 
-const initialState: PostState = {
-    posts: [],
-    postToShow: null,
+const initialState: CommentState = {
+    comments: [],
     loading: false,
     error: ""
 }
 
-export const commentReducer = (state = initialState, action: PostAction) : PostState => {
+export const commentReducer = (state = initialState, action: CommentAction) : CommentState => {
     switch(action.type) {
-        case PostActionTypes.FETCH_DATA:
+        case CommentActionTypes.FETCH_DATA:
             return {...state, loading: true, error: ""};
-        case PostActionTypes.FETCH_ERROR:
+        case CommentActionTypes.FETCH_ERROR:
             return {...state, loading: false, error: (action as FETCH_ERROR).payload};
-        case PostActionTypes.FETCH_POSTS_RESOLVE:
-            return {...state, loading: false, posts: (action as FetchPostsResolveAction).payload};
-        case PostActionTypes.FETCH_POST_RESOLVE:
-            return {...state, loading: false, postToShow: (action as PostFetchResolveAction).payload};
-        case PostActionTypes.ADD_POST:
-            return {...state, loading: false, posts: [(action as AddPostAction).payload, ...state.posts]};
-        case PostActionTypes.EDIT_POST:
-            const newPost = (action as EditPostAction).payload;
-            return {...state, loading: false, posts: state.posts.map(post => {
-                if(post.id === newPost.id)
-                    return newPost;
-                return post;
+        case CommentActionTypes.FETCH_COMMENTS_RESOLVE:
+            return {...state, loading: false, comments: (action as FetchCommentsResolveAction).payload};
+        case CommentActionTypes.ADD_COMMENT:
+            return {...state, loading: false, comments: [(action as AddCommentAction).payload, ...state.comments]};
+        case CommentActionTypes.EDIT_COMMENT:
+            const newComment = (action as EditCommentAction).payload;
+            return {...state, loading: false, comments: state.comments.map(comment => {
+                if(comment.id === newComment.id)
+                    return newComment;
+                return comment;
             })};
-        case PostActionTypes.DELETE_POST:
-            return {...state, loading: false, posts: state.posts.filter(post => post.id !== (action as DeletePostAction).payload.id)};
+        case CommentActionTypes.DELETE_COMMENT:
+            return {...state, loading: false, comments: state.comments.filter(comment => comment.id !== (action as DeleteCommentAction).payload.id)};
         default:
             return state;        
     }

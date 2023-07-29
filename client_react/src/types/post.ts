@@ -45,8 +45,12 @@ export interface DeletePostAction {
     type: string,
     payload: Post;
 }
+export interface AppendCommentAction {
+    type: string,
+    payload: Comment;
+}
 
-export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|PostFetchResolveAction|AddPostAction|EditPostAction|DeletePostAction;
+export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|PostFetchResolveAction|AddPostAction|EditPostAction|DeletePostAction|AppendCommentAction;
 
 export enum PostActionTypes {
     FETCH_DATA = 'FETCH_DATA',
@@ -55,7 +59,8 @@ export enum PostActionTypes {
     FETCH_POST_RESOLVE = 'FETCH_POST_RESOLVE',
     ADD_POST = 'ADD_POST',
     EDIT_POST = 'EDIT_POST',
-    DELETE_POST = 'DELETE_POST'
+    DELETE_POST = 'DELETE_POST',
+    APPEND_COMMENT = 'APPEND_COMMENT'
 }
 
 export type PostPageParams = {

@@ -1,4 +1,4 @@
-import { AddPostAction, DeletePostAction, EditPostAction, FETCH_ERROR, FetchPostsResolveAction, PostAction, PostActionTypes, PostFetchResolveAction, PostState } from "../../types/post";
+import { AddPostAction, AppendCommentAction, DeletePostAction, EditPostAction, FETCH_ERROR, FetchPostsResolveAction, PostAction, PostActionTypes, PostFetchResolveAction, PostState } from "../../types/post";
 
 const initialState: PostState = {
     posts: [],
@@ -19,6 +19,12 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
             return {...state, loading: false, postToShow: (action as PostFetchResolveAction).payload};
         case PostActionTypes.ADD_POST:
             return {...state, loading: false, posts: [(action as AddPostAction).payload, ...state.posts]};
+        case PostActionTypes.APPEND_COMMENT:
+            const newComment = (action as AppendCommentAction).payload;
+            console.log(state, newComment)
+            if(!state.postToShow)
+                return {...state};
+            return {...state, loading: false, postToShow: {...state.postToShow, comments: [newComment, ...state.postToShow.comments]}};
         case PostActionTypes.EDIT_POST:
             const newPost = (action as EditPostAction).payload;
             return {...state, loading: false, posts: state.posts.map(post => {

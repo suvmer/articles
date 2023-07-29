@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { Post, PostFormValue } from '../types/post';
 import { useNavigate } from 'react-router';
 import { CommentList } from './CommentList';
@@ -8,6 +8,7 @@ import { IconButton } from './UI/IconButton';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deletePost, editPost } from '../store/action-creators/post';
 import { PostForm } from './PostForm';
+import { CommentForm } from './CommentForm';
 
 interface PostProps {
     post: Post,
@@ -30,6 +31,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
         setEditedPost(newPost);
         dispatch(editPost(newPost));
     }
+    const MemoCommentForm = useMemo(() => <CommentForm post_id={post.id}/>, []);
     return <div className={`cardWrapper ${props.className ?? ''}`}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={`card${!disableLink ? ' card_link' : ''}`}>
             <div className='card__container'>
@@ -39,7 +41,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                     <p>{editedPost.title}</p>
                 </div>
                 <p className='card__body mt-4'>{editedPost.body}</p>
-                </> : <PostForm defaultValue={editedPost} onClose={updatePost} editing/>}
+                </> : <PostForm defaultValue={editedPost} onClose={updatePost} editing/>}                
             </div>
             <div className='card__append'>
                 {isEditing && 
@@ -65,6 +67,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                 />
             </div>
         </div>
-        {expanded ? <CommentList showTitle={expanded && showTitle} comments={editedPost.comments} /> : ""}
+        {showCommentsForm ? MemoCommentForm : ""}
+        {expanded ? <CommentList showTitle={expanded && showTitle} comments={post.comments} /> : ""}
     </div>
 }
