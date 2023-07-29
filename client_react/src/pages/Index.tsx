@@ -9,7 +9,7 @@ export const Index : FC = () => {
         <Header/>
         <div className='main'>
             <SideBar/>
-            {outlet}
+            <div className='contentWrapper'>{outlet}</div>
         </div>
     </div>
 }
