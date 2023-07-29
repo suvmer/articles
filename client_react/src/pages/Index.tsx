@@ -9,7 +9,9 @@ export const Index : FC = () => {
         <Header/>
         <div className='main'>
             <SideBar/>
-            <div className='contentWrapper'>{outlet}</div>
+            <div className='contentWrapper'>
+                <div className='content'>{outlet}</div>
+            </div>
         </div>
     </div>
 }

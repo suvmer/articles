@@ -18,8 +18,8 @@ export const MainPage : FC = () => {
         "Загрузка" :
         <PostList posts={posts}/>
         //posts.map(post => <PostCard post={post}></PostCard>);
-    return <div className='content'>
+    return <>
         {MemoPostForm}
         {postList}
-    </div>
+    </>
 }
