@@ -22,8 +22,8 @@ export const addComment = (comment:CommentFormValue) => {
             dispatch({type: CommentActionTypes.ADD_COMMENT, payload: response.data.comment});
             dispatch({type: PostActionTypes.APPEND_COMMENT, payload: response.data.comment});
         } catch(e:any) {
-            console.log(typeof e)
-            dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});
+            if(e.response?.data?.message)
+                dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
@@ -48,8 +48,8 @@ export const deleteComment = (comment:Comment) => {
             dispatch({type: CommentActionTypes.DELETE_COMMENT, payload: comment});
             dispatch({type: PostActionTypes.REMOVE_COMMENT, payload: comment});
         } catch(e:any) {
-            console.log(typeof e)
-            dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});
+            if(e.response?.data?.message)
+                dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }

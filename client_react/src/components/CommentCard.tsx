@@ -1,21 +1,20 @@
 import { FC, useState, useMemo } from 'react';
 import { Comment, CommentFormValue } from '../types/comment';
-import { useNavigate } from 'react-router';
-import { CommentList } from './CommentList';
 import Icon from '@mdi/react';
 import { mdiCheck, mdiPencil, mdiCommentOutline, mdiAccountCircle } from '@mdi/js';
 import { IconButton } from './UI/IconButton';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../store/action-creators/comment';
 import { CommentForm } from './CommentForm';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 interface CommentProps {
     comment: Comment,
     className?: string
 }
 export const CommentCard:FC<CommentProps> = ({comment, ...props} : CommentProps) => {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const error = useTypedSelector(state => state.comments.error)
     const [isEditing, setEditing] = useState<boolean>(false);
     const [editedComment, setEditedComment] = useState<Comment>(comment);
 

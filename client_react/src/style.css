@@ -119,13 +119,13 @@ html {
 .card__icon-input > svg {
     flex-shrink: 0;
 }
-.postForm {
+.addForm {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.postForm input, .postForm textarea {
+.addForm input, .addForm textarea {
     border: none;
     border-bottom: 1px solid gray;
     background-color: rgba(0, 0, 0, 0.04);
@@ -142,10 +142,10 @@ html {
     font-size: 1rem;
     outline: none;
 }
-.postForm__error {
+.addForm__error {
     color: var(--error);
 }
-.postForm__addButton {
+.addForm__addButton {
     background-color: rgb(76 175 80);
     color: var(--on-primary);
     padding: 16px 0;
@@ -154,7 +154,7 @@ html {
     border-radius: 4px;
     font-weight: 600;
 }
-.postForm > textarea {
+.addForm > textarea {
     min-height: 160px;
 }
 

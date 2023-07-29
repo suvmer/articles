@@ -34,14 +34,14 @@ export const PostForm:FC<PostFormProps> = ({onClose, defaultValue = {title: "", 
         }
     }
     
-    return <form className={`${!editing ? 'card ' : ''}postForm`} onSubmit={submitForm}>
+    return <form className={`${!editing ? 'card ' : ''}addForm`} onSubmit={submitForm}>
         {!editing && <p className="card__title">Добавить статью</p>}
-        {!editing && error ? <div className='postForm__error my-2'>{error}</div> : ""}
+        {!editing && error ? <div className='addForm__error my-2'>{error}</div> : ""}
         <div className='card__icon-input'>
             {editing && <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>}
             <input className='my-2' value={value.title} onChange={handleChange} name='title' placeholder='Название статьи'/>
         </div>
         <textarea value={value.body} onChange={handleChange} name='body' placeholder='Текст статьи'/>
-        {!editing && <button className='postForm__addButton' type="submit">Добавить статью</button>}
+        {!editing && <button className='addForm__addButton' type="submit">Добавить статью</button>}
     </form>
 }

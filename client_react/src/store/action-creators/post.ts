@@ -31,8 +31,8 @@ export const addPost = (post:PostFormValue) => {
             const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/article`, {...post});
             dispatch({type: PostActionTypes.ADD_POST, payload: response.data.post});
         } catch(e:any) {
-            console.log(typeof e)
-            dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
+            if(e.response?.data?.message)
+                dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
@@ -55,8 +55,8 @@ export const deletePost = (post:Post) => {
             await axios.delete(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`);
             dispatch({type: PostActionTypes.DELETE_POST, payload: post});
         } catch(e:any) {
-            console.log(typeof e)
-            dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
+            if(e.response?.data?.message)
+                dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
