@@ -16,6 +16,7 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
         case PostActionTypes.FETCH_POSTS_RESOLVE:
             return {...state, loading: false, posts: (action as FetchPostsResolveAction).payload};
         case PostActionTypes.FETCH_POST_RESOLVE:
+            console.log((action as PostFetchResolveAction).payload);
             return {...state, loading: false, postToShow: (action as PostFetchResolveAction).payload};
         case PostActionTypes.ADD_POST:
             return {...state, loading: false, posts: [(action as AddPostAction).payload, ...state.posts]};
