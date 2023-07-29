@@ -45,25 +45,3 @@ export const PostForm:FC<PostFormProps> = ({onClose, defaultValue = {title: "", 
         {!editing && <button className='postForm__addButton' type="submit">Добавить статью</button>}
     </form>
 }
-/*
-import { FC, ChangeEvent } from 'react';
-interface PostFormValue {
-    title: string,
-    body: string
-}
-interface PostFormProps {
-    //sendValue: (arg0: string, arg1: string) => void;
-    value: PostFormValue,
-    setValue: (arg0: PostFormValue) => void
-}
-export const PostForm:FC<PostFormProps> = ({value, setValue}: PostFormProps) => {
-    const handleChange : (arg0: ChangeEvent<HTMLInputElement>) => void = (event) => {
-        setValue({...value, [event.target.name]: event.target.value});
-    }
-    console.log("rerender")
-    return <div>
-        <input onChange={handleChange} name='title' placeholder='Название поста'></input>
-        <input onChange={handleChange} name='body' placeholder='Имя поста'></input>
-    </div>
-}
-*/
