@@ -19,9 +19,9 @@ html {
     --primary: rgba(98, 0, 238, 1);
     --on-primary: rgba(255, 255, 255, 1);
     --on-surface: rgba(0, 0, 0, 1);
+    --error: red;
 }
 .list {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -54,26 +54,51 @@ html {
 }
 
 .main {
-    padding: 60px 60px ;
+    padding: 60px 60px;
     display: flex;
     gap: 50px;
+    justify-content: start;
 }
-.card__wrapper {
+.contentWrapper {
+    flex-grow: 1;
+    min-width: 0;
+}
+.content {
+    max-width: 600px;
+    margin: auto;
+}
+.cardWrapper {
     width: 100%;
 }
 .card {
-    padding: 10px;
-    border: 1px solid black;
+    padding: 20px;
     display: flex;
     gap: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 .card__container {
     flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0px;
 }
 .card__title {
+    flex-shrink: 1;
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 0.0125rem;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.card__title > svg {
+    flex-shrink: 0;
+}
+.card__title > p {
+    min-width: 0px;
+    flex-shrink: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .card__body {
     font-size: 1.2rem;
@@ -86,12 +111,20 @@ html {
     cursor: pointer;
     text-decoration: none;
 }
+.card__icon-input {
+    display: flex;
+    align-items: center;
+}
+.card__icon-input > svg {
+    flex-shrink: 0;
+}
 .postForm {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.postForm > input, .postForm > textarea {
+.postForm input, .postForm > textarea {
     border: none;
     border-bottom: 1px solid gray;
     background-color: rgba(0, 0, 0, 0.04);
@@ -108,10 +141,32 @@ html {
     font-size: 1rem;
     outline: none;
 }
+.postForm__error {
+    color: var(--error);
+}
+.postForm__addButton {
+    background-color: rgb(76 175 80);
+    color: var(--on-primary);
+    padding: 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.postForm > textarea {
+    min-height: 160px;
+}
 
 .mt-2 {
     margin-top: 8px;
 }
 .mt-4 {
     margin-top: 16px;
+}
+.pr-4 {
+    margin-right: 16px;
+}
+.my-2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
