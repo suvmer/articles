@@ -7,12 +7,17 @@ import {
 } from "react-router-dom";
 import { MainPage } from './pages/MainPage';
 import { ErrorPage } from './pages/ErrorPage';
+import { PostPage } from './pages/PostPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
-    errorElement: <ErrorPage/>
+    errorElement: <ErrorPage/>,
+  },
+  {
+    path: "/post/:id",
+    element: <PostPage/>
   }
 ]);
 

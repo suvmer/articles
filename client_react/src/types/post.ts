@@ -10,17 +10,25 @@ export interface PostState {
     postToShow: Post | null,
     loading: boolean
 }
-
-export interface FetchPostsAction {
+export interface FETCH_DATA {
     type: string
 }
 export interface FetchPostsResolveAction {
     type: string,
     payload: Post[];
 }
-export type PostAction = FetchPostsResolveAction|FetchPostsAction;
+export interface PostFetchResolveAction {
+    type: string,
+    payload: Post;
+}
+export type PostAction = FETCH_DATA|FetchPostsResolveAction|PostFetchResolveAction;
 
 export enum PostActionTypes {
-    FETCH_POSTS = 'FETCH_POSTS',
+    FETCH_DATA = 'FETCH_DATA',
     FETCH_POSTS_RESOLVE = 'FETCH_POSTS_RESOLVE',
+    FETCH_POST_RESOLVE = 'FETCH_POST_RESOLVE',
+}
+
+export type PostPageParams = {
+    id: string
 }

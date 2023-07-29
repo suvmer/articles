@@ -1,0 +1,22 @@
+html {
+    font-family: "Roboto", sans-serif;
+}
+.card {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    display: flow-root;
+}
+.card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.0125rem;
+}
+.card__body {
+    font-size: 1.2rem;
+}
+
+.card_link {
+    cursor: pointer;
+    text-decoration: none;
+}
