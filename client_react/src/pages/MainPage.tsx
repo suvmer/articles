@@ -12,7 +12,7 @@ export const MainPage : FC = () => {
     const navigate = useNavigate();
     useEffect(() => { dispatch(fetchPosts()) }, []);
     const {loading, posts} = useTypedSelector(state => state.posts);
-    const postList = loading ?
+    const postList = (loading && !posts) ?
         "Загрузка" :
         <PostList posts={posts}/>
         //posts.map(post => <PostCard post={post}></PostCard>);
