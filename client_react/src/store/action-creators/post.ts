@@ -32,7 +32,7 @@ export const addPost = (post:PostFormValue) => {
             dispatch({type: PostActionTypes.ADD_POST, payload: response.data.post});
         } catch(e:any) {
             console.log(typeof e)
-            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
+            dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
@@ -41,10 +41,10 @@ export const editPost = (post:Post) => {
         try {
             dispatch({type: PostActionTypes.FETCH_DATA});
             const response = await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`, {...post});
-            dispatch({type: PostActionTypes.EDIT_POST, payload: response.data.post});
+            dispatch({type: PostActionTypes.EDIT_POST, payload: post});
         } catch(e:any) {
-            console.log(typeof e)
-            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
+            if(e.response?.data?.message)
+                dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
@@ -56,7 +56,7 @@ export const deletePost = (post:Post) => {
             dispatch({type: PostActionTypes.DELETE_POST, payload: post});
         } catch(e:any) {
             console.log(typeof e)
-            dispatch({type: PostActionTypes.FETCH_ERROR, error: e.response.data.message});
+            dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
