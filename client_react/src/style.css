@@ -26,6 +26,9 @@ html {
     flex-direction: column;
     gap: 10px;
 }
+.list_large {
+    gap: 50px;
+}
 .list__title {
     padding: 10px;
     font-size: 1.25rem;
@@ -87,7 +90,7 @@ html {
     display: flex;
     gap: 10px;
     border-radius: 4px;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1), 0px 3px 6px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 .card__container {
     flex-grow: 1;
@@ -114,6 +117,7 @@ html {
 }
 .card_expanded {
     white-space: wrap!important;
+    word-wrap: break-word;
 }
 .card__body {
     font-size: 1.2rem;
@@ -168,7 +172,7 @@ html {
     border-radius: 4px;
     font-weight: 600;
 }
-.addForm > textarea {
+.addForm textarea {
     min-height: 160px;
 }
 

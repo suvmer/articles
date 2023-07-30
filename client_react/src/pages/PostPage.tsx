@@ -7,13 +7,11 @@ import { PostPageParams } from "../types/post";
 import { PostCard } from '../components/PostCard';
 
 export const PostPage : FC = () => {
-    const {loading} = useTypedSelector(state => state.posts);
-    const postToShow = useTypedSelector(state => state.posts.postToShow);
-    
+    const {loading, postToShow} = useTypedSelector(state => state.posts);    
     const {id} = useParams<PostPageParams>();
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchPost(Number(id)));
     }, []);
-    return ((loading && !postToShow) ? <p>"Загрузка"</p> : postToShow ? <PostCard key={postToShow.id} expanded post={postToShow}/> : <p>"Пост не найден"</p>);
+    return ((loading && !postToShow) ? <p>"Загрузка"</p> : postToShow ? <PostCard key={postToShow.id} expanded post={postToShow}/> : <p>Пост не найден</p>);
 }

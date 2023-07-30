@@ -31,7 +31,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
         setEditedPost(newPost);
         dispatch(editPost(newPost));
     }
-    const MemoCommentForm = useMemo(() => <CommentForm post_id={post.id}/>, []);
+    const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, []);
     return <div className={`cardWrapper ${props.className ?? ''}`}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={`card${!disableLink ? ' card_link' : ''}`}>
             <div className='card__container'>
@@ -67,6 +67,6 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
             </div>
         </div>
         {showComments ? MemoCommentForm : ""}
-        {expanded ? <CommentList showTitle={expanded && showTitle} comments={post.comments} /> : ""}
+        {expanded ? <CommentList className='mt-4' showTitle={expanded && showTitle} comments={post.comments} /> : ""}
     </div>
 }

@@ -10,10 +10,11 @@ interface CommentFormProps {
     onClose?: (arg0:CommentFormValue) => void,
     defaultValue?: CommentFormValue,
     editing?: boolean,
-    post_id?: number
+    post_id?: number,
+    className?: string
 }
 
-export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body: "", post_id: 0}, editing = false, post_id = 0}:CommentFormProps) => {
+export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body: "", post_id: 0}, editing = false, post_id = 0, className=''}:CommentFormProps) => {
     const [value, setValue] = useState<CommentFormValue>({...defaultValue, post_id});
     const valueRef = useRef(value);
     const error = useTypedSelector(state => state.comments.error);
@@ -35,7 +36,7 @@ export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body:
         }
     }
     
-    return <form className={`${!editing ? 'card ' : ''}addForm`} onSubmit={submitForm}>
+    return <form className={`${!editing ? 'card ' : ''}addForm `+className} onSubmit={submitForm}>
         {!editing && <p className="card__title">Оставить комментарий</p>}
         {!editing && error ? <div className='addForm__error my-2'>{error}</div> : ""}
         <div className='card__icon-input'>

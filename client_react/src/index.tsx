@@ -9,6 +9,7 @@ import { MainPage } from './pages/MainPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { PostPage } from './pages/PostPage';
 import { Index } from './pages/Index';
+import { CommentAnalytic } from './pages/CommentAnalytic';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         loader: async () => document.title = "Список статей",
         element: <MainPage/>,
         index: true
+      },
+      {
+        path: "/comments",
+        loader: async () => document.title = "Комментарии",
+        element: <CommentAnalytic/>
       },
       {
         path: "/post/:id",

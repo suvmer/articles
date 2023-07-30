@@ -1,6 +1,9 @@
+import { Post } from "./post"
+
 export interface Comment {
     id: number,
     post_id: number,
+    Post: Post,
     body: string,
     updatedAt: number,
     createdAt: number
@@ -55,4 +58,8 @@ export enum CommentActionTypes {
 
 export type CommentPageParams = {
     id: string
+}
+export type AnalyticPageParams = {
+    dateFrom: string,
+    dateTo: string
 }
