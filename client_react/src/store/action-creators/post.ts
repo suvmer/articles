@@ -8,8 +8,9 @@ export const fetchPosts = () => {
             dispatch({type: PostActionTypes.FETCH_DATA});
             const response = await axios.get(process.env.REACT_APP_SERVER_URL+"/articles");
             dispatch({type: PostActionTypes.FETCH_POSTS_RESOLVE, payload: response.data.posts});
-        } catch {
-            dispatch({type: PostActionTypes.FETCH_POSTS_RESOLVE});
+        } catch(e:any) {
+            if(e.response?.data?.message)
+                dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
@@ -19,8 +20,9 @@ export const fetchPost = (id:number) => {
             dispatch({type: PostActionTypes.FETCH_DATA});
             const response = await axios.get(process.env.REACT_APP_SERVER_URL+`/article/${id}`);
             dispatch({type: PostActionTypes.FETCH_POST_RESOLVE, payload: response.data.post});
-        } catch {
-            dispatch({type: PostActionTypes.FETCH_POST_RESOLVE});
+        } catch(e:any) {
+            if(e.response?.data?.message)
+                dispatch({type: PostActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
