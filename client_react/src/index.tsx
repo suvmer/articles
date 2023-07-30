@@ -18,10 +18,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <MainPage/>
+        loader: async () => document.title = "Список статей",
+        element: <MainPage/>,
+        index: true
       },
       {
         path: "/post/:id",
+        loader: async () => document.title = "Статья",
         element: <PostPage/>
       }
     ]
