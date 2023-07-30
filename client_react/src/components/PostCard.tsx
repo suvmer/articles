@@ -38,7 +38,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                 {!isEditing ? <>
                 <div className='card__title'>
                     <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>
-                    <p>{editedPost.title}</p>
+                    <p className={expanded ? 'card_expanded' : ''}>{editedPost.title}</p>
                 </div>
                 <p className='card__body mt-4'>{editedPost.body}</p>
                 </> : <PostForm defaultValue={editedPost} onClose={updatePost} editing/>}                
