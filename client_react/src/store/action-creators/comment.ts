@@ -9,8 +9,9 @@ export const fetchComments = (dates: AnalyticPageParams) => {
             dispatch({type: CommentActionTypes.FETCH_DATA});
             const response = await axios.get(process.env.REACT_APP_SERVER_URL+"/analytic/comments", {params: {...dates}});
             dispatch({type: CommentActionTypes.FETCH_COMMENTS_RESOLVE, payload: response.data.comments});
-        } catch {
-            dispatch({type: CommentActionTypes.FETCH_COMMENTS_RESOLVE});
+        } catch(e:any) {
+            if(e.response?.data?.message)
+                dispatch({type: CommentActionTypes.FETCH_ERROR, payload: e.response.data.message});
         }
     }
 }
