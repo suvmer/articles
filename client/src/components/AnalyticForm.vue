@@ -1,4 +1,5 @@
 <template>
+   // TODO: style="z-index: 10;" убрать в отдельный класс
     <v-card title="Анализ комментариев" class="pa-2 overflow-visible" style="z-index: 10;">
         <VueDatePicker
             locale="ru"
@@ -27,6 +28,8 @@ export default {
     },
     props: {
         dates: {
+            // TODO: add type: Array
+            type: Array,
             default: [new Date(Date.now().valueOf() - 30*24*60*60*1000), Date.now()]
         }
     },

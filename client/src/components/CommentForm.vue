@@ -1,6 +1,7 @@
 <template>
     <v-card title="Оставить комментарий" class="pa-2">
         <v-form @submit.prevent class="pa-2">
+          // TODO: comment.body заменить на :value="comment"
             <v-textarea
                 v-model="comment.body"
                 label="Текст комментария"
@@ -21,6 +22,7 @@
 <script>
 export default {
     data: () => ({
+      // TODO: просто comment
         comment: {
             body: ""
         }
@@ -28,6 +30,7 @@ export default {
     props: {
         post_id: {
             type: Number,
+          // TODO: default: null,
             required: true
         },
         isEditing: {

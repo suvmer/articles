@@ -13,13 +13,14 @@ export const commentsModule = {
             state.commentStats = comments;
         },
         deleteCommentPost(state, post) {
-            state.commentStats = state.commentStats.filter(comment => comment.post_id != post.id);
+            state.commentStats = state.commentStats.filter(comment => comment.post_id !== post.id);
         }
     },
     actions: {
         async editComment({state, commit}, comment) {
           try {
               await axios.patch(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment/${comment.id}`, {...comment})
+              // TODO: сделать запрос на бэкенд для получения комментарий
           } catch(e) {
               console.log(e);
               if(e.response?.data?.message)
@@ -29,6 +30,7 @@ export const commentsModule = {
         async deleteComment({state, commit}, comment) {
             try {
                 await axios.delete(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment/${comment.id}/`)
+                // TODO: сделать по аналогии с добавлением
                 commit('removeComment', comment.id)
             } catch(e) {
                 console.log(e);
@@ -40,6 +42,10 @@ export const commentsModule = {
         async createComment({state, commit}, comment) {
             try {
                 const response = await axios.post(`${process.env.VUE_APP_API_URL}/article/${comment.post_id}/comment`, {...comment})
+                // TODO: сделать запрос на бэкенд для получения комментарий
+                // TODO: если допустим комментировать статью будут 2 человека одновременно,
+                //  то они не будут видеть чужие комментарии, только свои.
+                // TODO: commit('addComment', response.data.comment); - убрать
                 commit('addComment', response.data.comment);
             } catch(e) {
                 console.log(e);

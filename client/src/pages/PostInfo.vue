@@ -30,9 +30,8 @@
     },
     computed: {
         getPost() {
-            if(this.$store.state.article.postToShow?.id === this.id)
-                return this.$store.state.article.postToShow;
-            return null;
+            return this.$store.state?.article?.postToShow?.id === this.id
+              ? this.$store.state?.article?.postToShow : null;
         }
     },
     methods: {

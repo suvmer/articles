@@ -17,18 +17,28 @@ class CommentsController {
     }
     async getComment(req, res, next) {
         try {
-            const id = req.params.id;
-            const post = await Posts.findByPk(id);
-            if(post === null)
+            // TODO: прибрался сам чуть-чуть;
+            if (!req || !req.params) {
                 throw ApiError.BadRequest("Статья не найдена");
-            const commid = req.params.commid;
+            }
+
+            const { id, commid } = req.params
+            const post = await Posts.findByPk(id);
+
+            if (!post) {
+                throw ApiError.BadRequest("Статья не найдена");
+            }
+
             const comment = await Comments.findByPk(commid, {
                 include:  [
                     {model: Posts}
                 ]
             });
-            if(comment === null || comment.post_id != post.id)
+
+            if (!comment || (comment.post_id !== post.id)) {
                 throw ApiError.BadRequest("Комментарий не найден");
+            }
+
             res.status(200).json({status: true, comment})
         } catch(e) {
             next(e);
@@ -36,6 +46,7 @@ class CommentsController {
     }
     async getComments(req, res, next) {
         try {
+            // TODO: сделать проверку на существование id + существование req и params;
             const id = req.params.id;
             const comments = await Comments.findAll({
                 where: {
@@ -53,6 +64,7 @@ class CommentsController {
     }
     async editComment(req, res, next) {
         try {
+            // TODO: заменить на const { id, commid } = req.params;
             const id = req.params.id;
             const commid = req.params.commid;
             const comment = await Comments.update({...req.comment}, {
@@ -61,6 +73,8 @@ class CommentsController {
                     post_id: id
                 }
             });
+
+            // TODO: !comment.length
             if(!comment[0])
                 throw ApiError.BadRequest("Комментарий не найден");
             res.status(200).json({status: true})
@@ -70,6 +84,7 @@ class CommentsController {
     }
     async deleteComment(req, res, next) {
         try {
+            // TODO: заменить на const { id, commid } = req.params;
             const id = req.params.id;
             const commid = req.params.commid;
             if(!id)
@@ -80,6 +95,7 @@ class CommentsController {
                     post_id: id
                 }
             });
+            // TODO: !comment.length
             if(!comment)
                 throw ApiError.BadRequest("Комментарий не найден");
             res.status(200).json({status: true})

@@ -35,6 +35,7 @@ export default {
         Post, Comment
     },
     props: {
+       // TODO: добавить типы свойств
         comments: {
             type: Array,
             required: true

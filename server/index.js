@@ -22,6 +22,23 @@ const CommentMiddleware = require('./middlewares/comment-middleware.js');
 const AnalyticController = require('./controllers/analytic-controller.js');
 
 const router = new Router();
+// TODO: желательно роуты поместить в отдельные дирректории
+// TODO: article/router.js, analytic/router.js
+// router.js
+/* const { Router } = require('express');
+const router = new Router({
+    caseSensitive: true,
+    mergeParams: true,
+    strict: true,
+});
+
+... роутеры
+router.get...
+router.post...
+module.exports = router; */
+
+// TODO: в текущем файле лишь делать инициализацию маршрутов restRouter.use('/article/', articleRouter);
+// TODO: подключение middleware тоже поместить в router.js 18-22 стр.
 router.post('/article', ArticleMiddleware, ArticleController.addArticle);
 router.get('/article/:id', ArticleController.getArticle);
 router.get('/articles', ArticleController.getArticles);

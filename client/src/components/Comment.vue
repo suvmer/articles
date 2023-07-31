@@ -4,6 +4,7 @@
         variant="outlined"
     >
         <template v-slot:title>
+          // TODO: такие вещи !isEditing ? newComment.body : "" лучше выносить в computed
             <v-list-item-title class="text-wrap">{{ !isEditing ? newComment.body : "" }}</v-list-item-title>
             <v-textarea
                 v-if="isEditing"
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+// TODO: import {toDMY} from '../utils' не будет работать?
 const {toDMY} = require('../utils');
 import DeleteIcon from './DeleteIcon';
 export default {
@@ -36,6 +38,8 @@ export default {
     props: {
         comment: {
             type: Object,
+            // TODO: add default: () => ({}),
+            default: () => ({}),
             required: true
         }
     },

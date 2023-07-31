@@ -54,6 +54,7 @@ export const articleModule = {
         async editPost({state, commit}, post) {
           try {
               await axios.patch(`${process.env.VUE_APP_API_URL}/article/${post.id}/`, {...post})
+              // TODO: поправить по образу и подобию commentsModule.js
           } catch(e) {
               console.log(e);
               if(e.response?.data?.message)
@@ -63,6 +64,7 @@ export const articleModule = {
         async deletePost({state, commit}, post) {
           try {
               await axios.delete(`${process.env.VUE_APP_API_URL}/article/${post.id}/`)
+              // TODO: поправить по образу и подобию commentsModule.js
               commit('removePost', post.id)
               commit('deleteCommentPost', post)
           } catch(e) {
@@ -75,6 +77,7 @@ export const articleModule = {
             try {
                 commit('setLoading', true);
                 const response = await axios.post(`${process.env.VUE_APP_API_URL}/article`, {...post})
+                // TODO: поправить по образу и подобию commentsModule.js
                 commit('setPosts',  [response.data.post, ...state.posts]);
             } catch(e) {
                 console.log(e);

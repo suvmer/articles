@@ -5,6 +5,7 @@ const Posts = require("../models/posts");
 class ArticleController {
     async addArticle(req, res, next) {
         try {
+            // TODO: поменять var на const
             var post = await Posts.create({...req.article}, {
                 include:  [{
                     model: Comments,
@@ -20,6 +21,7 @@ class ArticleController {
     }
     async getArticle(req, res, next) {
         try {
+            // TODO: сделать проверку на существование id + существование req и params;
             const id = req.params.id;
             const post = await Posts.findByPk(id,{
                 include:  [{
@@ -29,7 +31,8 @@ class ArticleController {
                     separate: true
                 }]
             });
-            if(post === null)
+
+            if (!post)
                 throw ApiError.BadRequest("Статья не найдена");
             res.status(200).json({status: true, post})
         } catch(e) {
@@ -54,6 +57,7 @@ class ArticleController {
     }
     async editArticle(req, res, next) {
         try {
+            // TODO: сделать проверку на существование id + существование req и params;
             const id = req.params.id;
             if(!id)
                 throw ApiError.BadRequest("Статья не найдена");
@@ -62,7 +66,7 @@ class ArticleController {
                     id: id
                 }
             });
-            if(!post[0])
+            if(!post || !post.length)
                 throw ApiError.BadRequest("Статья не найдена");
             res.status(200).json({status: true})
         } catch(e) {
@@ -71,6 +75,7 @@ class ArticleController {
     }
     async deleteArticle(req, res, next) {
         try {
+            // TODO: сделать проверку на существование id + существование req и params;
             const id = req.params.id;
             if(!id)
                 throw ApiError.BadRequest("Статья не найдена");
