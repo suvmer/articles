@@ -5,6 +5,7 @@ import Icon from '@mdi/react';
 import { mdiGithub } from '@mdi/js';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { UIActionTypes } from '../types/UI';
+import { sideBarVisible } from '../store/action-creators/ui';
 
 export const SideBar:FC = () => {
     const [isHidden, setHidden] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export const SideBar:FC = () => {
     }, [hidden])
     const closeSideBar:MouseEventHandler<HTMLDivElement> = (e) => {
         e.stopPropagation();
-        dispatch({type: UIActionTypes.SET_SIDEBAR_OPEN, payload: false});
+        dispatch(sideBarVisible(false));
     }
     return <>
         <div onClick={!isHidden ? () => {} : closeSideBar} className={'sideBarOverlay'+(isHidden ? ' sideBarOverlay_visible' : '')}/>
