@@ -6,15 +6,13 @@ import { IconButton } from './UI/IconButton';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../store/action-creators/comment';
 import { CommentForm } from './CommentForm';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 
 interface CommentProps {
     comment: Comment,
     className?: string
 }
-export const CommentCard:FC<CommentProps> = ({comment, ...props} : CommentProps) => {
+export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentProps) => {
     const dispatch = useAppDispatch();
-    const error = useTypedSelector(state => state.comments.error)
     const [isEditing, setEditing] = useState<boolean>(false);
     const [editedComment, setEditedComment] = useState<Comment>(comment);
 
@@ -23,7 +21,7 @@ export const CommentCard:FC<CommentProps> = ({comment, ...props} : CommentProps)
         setEditedComment(newComment);
         dispatch(editComment(newComment));
     }
-    return <div className={`cardWrapper ${props.className ?? ''}`}>
+    return <div className={'cardWrapper' + className}>
         <div className='card'>
             <div className='card__container'>
                 {!isEditing ? <>

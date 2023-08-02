@@ -11,13 +11,13 @@ interface IconButtonProps {
 export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconPath = mdiDelete, className=""}:IconButtonProps) => {
     const [stage, setStage] = useState<number>(0);
     return  <button
+                className={'IconButton '+className}
                 onClick={(e) => {
                     e.stopPropagation();
                     if(toDelete && stage < 2)
                         return setStage(stage+1)
                     onClick()
-                }}
-                className={'IconButton '+className}>
+                }}>
         <Icon
             path={toDelete ? [mdiDelete, mdiDeleteSweep, mdiDeleteAlert][stage] : iconPath}
             size={1}
