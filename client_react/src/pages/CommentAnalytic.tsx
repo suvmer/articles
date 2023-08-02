@@ -8,7 +8,7 @@ import { AnalyticPageParams, Comment } from '../types/comment';
 import { PostList } from '../components/PostList';
 import { DAY_MS, MONTH_MS, normalizeTimeStamp } from '../utils';
 import { CustomProvider, DateRangePicker } from 'rsuite';
-import 'rsuite/dist/rsuite.min.css';
+import 'rsuite/dist/rsuite-no-reset.min.css';
 import { DateRange } from 'rsuite/esm/DateRangePicker';
 import {ruRU} from 'rsuite/locales';
 

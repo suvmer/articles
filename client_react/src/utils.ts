@@ -9,3 +9,15 @@ export const normalizeTimeStamp = (timestamp:number) : number => {
     const date = new Date(timestamp);
     return (timestamp - (date.getHours()*60 + date.getMinutes())*60*1000 - date.getSeconds()*1000);
 }
+
+export const toWidth = (num:number, length:number, toRepeat:string = "0") => {
+    const str = num.toString()
+    if(str.length < length)
+        return toRepeat.repeat(length - str.length) + str;
+    
+    return str;
+}
+export const toDMY = (timestamp:number) => {
+    const date = new Date(timestamp);
+    return `${toWidth(date.getDate(), 2)}.${toWidth(date.getMonth() + 1, 2)}.${date.getFullYear()} ${toWidth(date.getHours(), 2)}:${toWidth(date.getMinutes(), 2)}`;
+}

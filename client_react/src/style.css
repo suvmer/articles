@@ -7,6 +7,10 @@ a {
     text-decoration: none!important;
     color: var(--on-surface)!important;
 }
+
+svg {
+    flex-shrink: 0;
+}
 button {
     background-color: transparent;
     outline: none;
@@ -20,6 +24,7 @@ html {
 }
 :root {
     --primary: rgba(98, 0, 238, 1);
+    --secondary: rgba(0, 0, 0, 0.4);
     --on-primary: rgba(255, 255, 255, 1);
     --on-surface: rgba(0, 0, 0, 1);
     --error: red;
@@ -111,28 +116,38 @@ html {
 .card {
     padding: 20px;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 1.2rem;
     border-radius: 4px;
     box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1), 0px 3px 6px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.card__container {
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-width: 0px;
-}
-.card__title {
-    flex-shrink: 1;
+.card__row {
     font-size: 1.25rem;
     font-weight: var(--weight-bold);
     letter-spacing: 0.0125rem;
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
-.card__title > svg {
+.card__row_gap {
+    gap: 1rem;
+}
+.card__row > * {
     flex-shrink: 0;
 }
-.card__title > p {
-    min-width: 0px;
+
+.card__subrow {
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+.card__row > p {
+    flex-grow: 1;
     flex-shrink: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -145,8 +160,10 @@ html {
 .card__body {
     font-size: 1.2rem;
 }
-.card__append {
-    flex-shrink: 0;
+
+.card__footer {
+    display: flex;
+    justify-content: space-between;
 }
 
 .card_link {
@@ -156,9 +173,6 @@ html {
 .card__icon-input {
     display: flex;
     align-items: center;
-}
-.card__icon-input > svg {
-    flex-shrink: 0;
 }
 .addForm {
     width: 100%;
@@ -231,6 +245,19 @@ html {
 }
 .ml-2 {
     margin-left: 8px;
+}
+
+.text {
+    display: inline;
+    font-size: 1.2rem;
+    color: var(--on-surface);
+    letter-spacing: 0.05rem;
+}
+.text_secondary {
+    color: var(--secondary);
+}
+.text_small {
+    font-size: 1rem;
 }
 
 @media only screen and (max-width: 992px) {

@@ -3,12 +3,13 @@ import { Post, PostFormValue } from '../types/post';
 import { useNavigate } from 'react-router';
 import { CommentList } from './CommentList';
 import Icon from '@mdi/react';
-import { mdiCheck, mdiPencil, mdiPostOutline } from '@mdi/js';
+import { mdiCheck, mdiComment, mdiCommentMultipleOutline, mdiPencil, mdiPostOutline } from '@mdi/js';
 import { IconButton } from './UI/IconButton';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deletePost, editPost } from '../store/action-creators/post';
 import { PostForm } from './PostForm';
 import { CommentForm } from './CommentForm';
+import { toDMY } from '../utils';
 
 interface PostProps {
     post: Post,
@@ -32,38 +33,56 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
         dispatch(editPost(newPost));
     }
     const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, []);
+
+    const getTimeCreated = () => {
+        return toDMY(post.createdAt);
+    }
+    const getTimeEdited = () => {
+        return post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``;
+    }
+
     return <div className={`cardWrapper ${props.className ?? ''}`}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={`card${!disableLink ? ' card_link' : ''}`}>
-            <div className='card__container'>
-                {!isEditing ? <>
-                <div className='card__title'>
-                    <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>
-                    <p className={expanded ? 'card_expanded' : ''}>{editedPost.title}</p>
-                </div>
-                <p className='card__body mt-4'>{editedPost.body}</p>
-                </> : <PostForm defaultValue={editedPost} onClose={updatePost} editing/>}                
-            </div>
-            <div className='card__append'>
-                {isEditing && 
+            <div className='card__row'>
+                {!isEditing && <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>}
+                {!isEditing && <p className={expanded ? 'card_expanded' : ''}>{editedPost.title}</p>}
+                {isEditing && <PostForm defaultValue={editedPost} onClose={updatePost} editing/>}
+                <div>
+                    {isEditing && 
+                        <IconButton
+                            onClick={() => {
+                                setEditing(false)
+                            }}
+                            iconPath={mdiCheck}
+                        />}
+                    {!isEditing && 
+                        <IconButton
+                            onClick={() => setEditing(true)}
+                            iconPath={mdiPencil}
+                        />}
                     <IconButton
+                        toDelete
                         onClick={() => {
-                            setEditing(false)
+                            dispatch(deletePost(editedPost))
+                            if(expanded && showCommentsForm)
+                                navigate(-1);
                         }}
-                        iconPath={mdiCheck}
-                    />}
-                {!isEditing && 
-                    <IconButton
-                        onClick={() => setEditing(true)}
-                        iconPath={mdiPencil}
-                    />}
-                <IconButton
-                    toDelete
-                    onClick={() => {
-                        dispatch(deletePost(editedPost))
-                        if(expanded && showCommentsForm)
-                            navigate(-1);
-                    }}
-                />
+                    />
+                </div>
+            </div>
+            <p className='card__body'>{editedPost.body}</p>
+            <div className='card__row card__row_gap'>
+                <div className='card__subrow'>
+                    <Icon
+                        path={mdiCommentMultipleOutline}
+                        size={1.0}
+                    />
+                    <p className='text'>{editedPost.comments.length}</p>
+                </div>
+                <div className='card__subrow'>
+                    <p className='text text_secondary text_small'>{getTimeCreated()}</p>
+                    <p className='text text_secondary text_small'>{getTimeEdited()}</p>
+                </div>
             </div>
         </div>
         {showComments ? MemoCommentForm : ""}
