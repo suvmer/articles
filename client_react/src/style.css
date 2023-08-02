@@ -45,46 +45,7 @@ html {
     color: var(--on-primary);
     z-index: 2;
 }
-.sideBarOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    z-index: 1;
-    visibility: hidden;
-    transition: background-color 50ms ease-in, visibility 50ms linear;
-}
-.sideBarOverlay_visible {
-    background-color: rgba(0, 0, 0, 0.4);
-    visibility: visible;
-}
-.sideBar {
-    width: 300px;
-    margin-top: -15px;
-    padding-top: 15px;
-    margin-bottom: auto;
-    font-weight: var(--weight-bold);
-    flex-shrink: 0;
-    background-color: white;
-    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1), 0px 3px 6px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-}
-.button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    font-size: 1.1rem;
-    border-radius: 4px;
-    justify-content: center;
-    gap: 20px;
-    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1), 0px 3px 6px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
-.button:hover {
-    background-color: rgba(0, 0, 0, 0.064);
-    transition: background-color 100ms linear;
-}
+
 .navigationButton {
     padding: 20px 10px;
     display: flex;
@@ -171,16 +132,6 @@ html {
     :root {
         font-size: 12px;
         --weight-bold: 500;
-    }
-    .sideBar {
-        position: fixed;
-        left: -300px;
-        transition: left 100ms ease-in;
-        z-index: 1;
-    }
-    .sideBar_show {
-        left: 0;
-        display: block;
     }
     .main {
         padding-right: 0;
