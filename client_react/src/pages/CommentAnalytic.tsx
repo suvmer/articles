@@ -5,7 +5,7 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { Post } from "../types/post";
 import { fetchComments } from '../store/action-creators/comment';
 import { AnalyticPageParams, Comment } from '../types/comment';
-import { PostList } from '../components/PostList/PostList';
+import { PostList } from '../components/Lists/PostList';
 import { DAY_MS, MONTH_MS, normalizeTimeStamp } from '../utils';
 import { CustomProvider, DateRangePicker } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css';

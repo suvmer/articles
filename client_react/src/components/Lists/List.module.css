@@ -1,0 +1,13 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.list_large {
+    gap: 50px;
+}
+.list__title {
+    padding: 10px;
+    font-size: 1.25rem;
+    font-weight: var(--weight-bold);
+}

@@ -32,19 +32,6 @@ html {
     --weight-normal: 400;
     --weight-bold: 600;
 }
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.list_large {
-    gap: 50px;
-}
-.list__title {
-    padding: 10px;
-    font-size: 1.25rem;
-    font-weight: var(--weight-bold);
-}
 .header {
     position: fixed;
     display: flex;
@@ -127,112 +114,11 @@ html {
     max-width: 600px;
     margin: auto;
 }
-.cardWrapper {
-    width: 100%;
-}
-.card {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    border-radius: 4px;
-    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1), 0px 3px 6px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
-.card__row {
-    font-size: 1.25rem;
-    font-weight: var(--weight-bold);
-    letter-spacing: 0.0125rem;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-}
-.card__row_gap {
-    gap: 1rem;
-}
-.card__row > * {
-    flex-shrink: 0;
-}
 
-.card_thin {
-    font-weight: var(--weight-normal);
-}
 
-.card__subrow {
-    display: flex;
-    align-items: center;
-    flex-shrink: 1;
-    min-width: 0;
-    justify-content: center;
-    gap: 1rem;
-    text-align: center;
-}
-.card__row > p {
-    flex-grow: 1;
-    flex-shrink: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.card_expanded {
-    white-space: wrap!important;
-    word-wrap: break-word;
-}
-.card__body {
-    font-size: 1.2rem;
-}
 
-.card__footer {
-    display: flex;
-    justify-content: space-between;
-}
 
-.card_link {
-    cursor: pointer;
-    text-decoration: none;
-}
-.card__icon-input {
-    display: flex;
-    align-items: center;
-}
-.addForm {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.addForm input, .addForm textarea {
-    border: none;
-    border-bottom: 1px solid gray;
-    background-color: rgba(0, 0, 0, 0.04);
-    flex-wrap: wrap;
-    letter-spacing: 0.009375em;
-    opacity: 0.87;
-    min-height: 56px;
-    padding-inline-start: 15px;
-    padding-inline-end: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    position: relative;
-    width: 100%;
-    font-size: 1rem;
-    outline: none;
-}
-.addForm__error {
-    color: var(--error);
-}
-.addForm__addButton {
-    background-color: rgb(76 175 80);
-    color: var(--on-primary);
-    padding: 16px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    border-radius: 4px;
-    font-weight: var(--weight-bold);
-}
-.addForm textarea {
-    min-height: 160px;
-}
+
 .menuIcon {
     display: none;
 }

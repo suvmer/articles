@@ -5,8 +5,10 @@ import { mdiCheck, mdiPencil, mdiCommentOutline, mdiAccountCircle } from '@mdi/j
 import { IconButton } from '../UI/IconButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../../store/action-creators/comment';
-import { CommentForm } from '../CommentForm/CommentForm';
+import { CommentForm } from '../Forms/CommentForm';
 import { toDMY } from '../../utils';
+import styles from "./Card.module.css";
+
 
 interface CommentProps {
     comment: Comment,
@@ -25,12 +27,12 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
     const getTimeCreated = () => toDMY(comment.createdAt);
     const getTimeEdited = () => comment.createdAt != comment.updatedAt ? ` (Изменён: ${toDMY(comment.updatedAt)})` : ``;
     
-    return <div className={'cardWrapper'+className}>
-        <div className='card'>
-            <div className='card__row'>
+    return <div className={styles.cardWrapper +' '+className}>
+        <div className={styles.card}>
+            <div className={styles.card__row}>
                 {!isEditing && <Icon className='pr-4' path={mdiAccountCircle} size={1.3}/>}
-                {!isEditing && <p className='card_expanded card_thin'>{editedComment.body}</p>}
-                {isEditing && <CommentForm className='card_thin' post_id={comment.post_id} defaultValue={editedComment} onClose={updateComment} editing/>}      
+                {!isEditing && <p className={styles.card_expanded + ' ' + styles.card_thin}>{editedComment.body}</p>}
+                {isEditing && <CommentForm className={styles.card_thin} post_id={comment.post_id} defaultValue={editedComment} onClose={updateComment} editing/>}      
                 <div>
                     {isEditing && 
                         <IconButton
@@ -53,8 +55,8 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
                     />
                 </div>
             </div>
-            <div className='card__row card__row_gap'>
-                <div className='card__subrow'>
+            <div className={styles.card__row + ' ' + styles.card__row_gap}>
+                <div className={styles.card__subrow}>
                     <p className='text text_secondary text_small'>{getTimeCreated()}</p>
                     <p className='text text_secondary text_small'>{getTimeEdited()}</p>
                 </div>

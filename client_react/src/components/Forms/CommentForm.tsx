@@ -5,6 +5,7 @@ import { Icon } from '@mdi/react';
 import { mdiPostOutline } from '@mdi/js';
 import { CommentFormValue } from '../../types/comment';
 import { addComment } from '../../store/action-creators/comment';
+import styles from "./Form.module.css";
 
 interface CommentFormProps {
     onClose?: (arg0:CommentFormValue) => void,
@@ -36,13 +37,13 @@ export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body:
         }
     }
     
-    return <form className={`${!editing ? 'card ' : ''}addForm `+className} onSubmit={submitForm}>
-        {!editing && <p className="card__title">Оставить комментарий</p>}
-        {!editing && error ? <div className='addForm__error my-2'>{error}</div> : ""}
-        <div className='card__icon-input'>
+    return <form className={[styles.addForm, (!editing ? styles.formCard : ''), className].join(' ')} onSubmit={submitForm}>
+        {!editing && <p>Оставить комментарий</p>}
+        {!editing && error ? <div className={styles.addForm__error + ' my-2'}>{error}</div> : ""}
+        <div className={styles['formCard__icon-input']}>
             {editing && <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>}
             <textarea className='my-2' value={value.body} onChange={handleChange} name='body' placeholder='Текст комментария'/>
         </div>
-        {!editing && <button className='addForm__addButton' type="submit">Прокомментировать</button>}
+        {!editing && <button className={styles.addForm__addButton} type="submit">Прокомментировать</button>}
     </form>
 }

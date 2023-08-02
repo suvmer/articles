@@ -4,7 +4,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector"
 import { fetchPost } from "../store/action-creators/post";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { PostPageParams } from "../types/post";
-import { PostCard } from '../components/PostCard/PostCard';
+import { PostCard } from '../components/Cards/PostCard';
 
 export const PostPage : FC = () => {
     const {loading, postToShow} = useTypedSelector(state => state.posts);    

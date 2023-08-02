@@ -3,8 +3,8 @@ import { useTypedSelector } from "../hooks/useTypedSelector"
 import { fetchPosts } from "../store/action-creators/post"
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import '../style.css';
-import { PostList } from '../components/PostList/PostList';
-import { PostForm } from '../components/PostForm/PostForm';
+import { PostList } from '../components/Lists/PostList';
+import { PostForm } from '../components/Forms/PostForm';
 
 export const MainPage : FC = (props) => {
     const dispatch = useAppDispatch();
