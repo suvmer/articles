@@ -53,7 +53,6 @@ end      15.10.23 16:34 -> end 16.10.23 00:00
     const list = ((loading && !commentGroups?.length) ? <div className='card mt-4'>Загрузка</div> : (commentGroups?.length ? <PostList className="mt-4" expanded posts={commentGroups}/> :
         <div className='card mt-4'>Нет комментариев</div>));
     return <>
-        {/* hack: исправлен некликабельный оверлей у компонента */}
         <CustomProvider locale={ruRU}>
             <DateRangePicker
                 isoWeek
