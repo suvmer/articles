@@ -13,7 +13,7 @@ export const SideBar:FC = () => {
     return <aside className={'sideBar' + (isHidden ? ' sideBar_show' : '')}>
         <NavigationButton to="/">Список статей</NavigationButton>
         <NavigationButton to="/comments">Комментарии</NavigationButton>
-        <a className='button ma-4' href='https://github.com/suvmer/articles'>
+        <a className='button ma-4' href='https://github.com/suvmer/articles' target='_BLANK'>
             <Icon path={mdiGithub} size={1.3}/>
             GITHUB
         </a>

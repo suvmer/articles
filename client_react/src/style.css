@@ -202,8 +202,8 @@ html {
     display: none;
 }
 .IconButton {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
 }
 .IconButton > * {
     transform: rotate(0);
