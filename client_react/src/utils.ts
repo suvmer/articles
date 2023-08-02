@@ -7,5 +7,5 @@ export const normalizeDate = (data:Date) : Date => {
 //example: 16.04.23 15:30 => 16.04.23 00:00
 export const normalizeTimeStamp = (timestamp:number) : number => {
     const date = new Date(timestamp);
-    return (timestamp - (date.getHours()*60 + date.getMinutes())*60*1000);
+    return (timestamp - (date.getHours()*60 + date.getMinutes())*60*1000 - date.getSeconds()*1000);
 }
