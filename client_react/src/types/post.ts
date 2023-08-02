@@ -29,6 +29,13 @@ export interface FetchPostsResolveAction {
     type: string,
     payload: Post[];
 }
+export interface FetchPostCommentsResolveAction {
+    type: string,
+    payload: {
+        post_id: number,
+        comments: Comment[]
+    }
+}
 export interface PostFetchResolveAction {
     type: string,
     payload: Post;
@@ -54,12 +61,13 @@ export interface RemoveCommentAction {
     payload: Comment;
 }
 
-export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|PostFetchResolveAction|AddPostAction|EditPostAction|DeletePostAction|AppendCommentAction|RemoveCommentAction;
+export type PostAction = FETCH_DATA|FETCH_ERROR|FetchPostsResolveAction|FetchPostCommentsResolveAction|PostFetchResolveAction|AddPostAction|EditPostAction|DeletePostAction|AppendCommentAction|RemoveCommentAction;
 
 export enum PostActionTypes {
     FETCH_DATA = 'FETCH_DATA',
     FETCH_ERROR = 'FETCH_ERROR',
     FETCH_POSTS_RESOLVE = 'FETCH_POSTS_RESOLVE',
+    FETCH_POST_COMMENTS_RESOLVE = 'FETCH_POST_COMMENTS_RESOLVE',
     FETCH_POST_RESOLVE = 'FETCH_POST_RESOLVE',
     ADD_POST = 'ADD_POST',
     EDIT_POST = 'EDIT_POST',

@@ -1,4 +1,5 @@
 import { AddCommentAction, CommentAction, CommentActionTypes, CommentState, DeleteCommentAction, EditCommentAction, FETCH_ERROR, FetchCommentsResolveAction } from "../../types/comment";
+import { PostActionTypes } from "../../types/post";
 
 const initialState: CommentState = {
     comments: [],
@@ -11,7 +12,6 @@ export const commentReducer = (state = initialState, action: CommentAction) : Co
         case CommentActionTypes.FETCH_DATA:
             return {...state, loading: true, error: ""};
         case CommentActionTypes.FETCH_ERROR:
-            console.log((action as FETCH_ERROR).payload)
             return {...state, loading: false, error: (action as FETCH_ERROR).payload};
         case CommentActionTypes.FETCH_COMMENTS_RESOLVE:
             return {...state, loading: false, comments: (action as FetchCommentsResolveAction).payload};

@@ -1,4 +1,4 @@
-import { AddPostAction, AppendCommentAction, DeletePostAction, EditPostAction, FETCH_ERROR, FetchPostsResolveAction, PostAction, PostActionTypes, PostFetchResolveAction, PostState } from "../../types/post";
+import { AddPostAction, AppendCommentAction, DeletePostAction, EditPostAction, FETCH_ERROR, FetchPostCommentsResolveAction, FetchPostsResolveAction, PostAction, PostActionTypes, PostFetchResolveAction, PostState } from "../../types/post";
 
 const initialState: PostState = {
     posts: [],
@@ -15,6 +15,10 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
             return {...state, loading: false, error: (action as FETCH_ERROR).payload};
         case PostActionTypes.FETCH_POSTS_RESOLVE:
             return {...state, loading: false, posts: (action as FetchPostsResolveAction).payload};
+        case PostActionTypes.FETCH_POST_COMMENTS_RESOLVE:
+            if(!state.postToShow || state.postToShow.id != (action as FetchPostCommentsResolveAction).payload.post_id)
+                return state;
+            return {...state, loading: false, postToShow: {...state.postToShow, comments: (action as FetchPostCommentsResolveAction).payload.comments}}
         case PostActionTypes.FETCH_POST_RESOLVE:
             console.log((action as PostFetchResolveAction).payload);
             return {...state, loading: false, postToShow: (action as PostFetchResolveAction).payload};

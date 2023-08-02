@@ -73,7 +73,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
                         path={mdiCommentMultipleOutline}
                         size={1.0}
                     />
-                    <p className='text'>{editedPost.comments.length}</p>
+                    <p className='text card_thin'>{post.comments.length}</p>
                 </div>
                 <div className='card__subrow'>
                     <p className='text text_secondary text_small'>{getTimeCreated()}</p>
