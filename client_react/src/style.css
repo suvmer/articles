@@ -29,6 +29,7 @@ html {
     --on-surface: rgba(0, 0, 0, 1);
     --error: red;
     --header-height: 4rem;
+    --weight-normal: 400;
     --weight-bold: 600;
 }
 .list {
@@ -55,11 +56,27 @@ html {
     font-size: 1.4rem;
     background-color: var(--primary);
     color: var(--on-primary);
+    z-index: 2;
+}
+.sideBarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
     z-index: 1;
+    visibility: hidden;
+    transition: background-color 100ms ease-in, visibility 100ms linear;
+}
+.sideBarOverlay_visible {
+    background-color: rgba(0, 0, 0, 0.4);
+    visibility: visible;
 }
 .sideBar {
     width: 300px;
     margin-top: -15px;
+    padding-top: 15px;
     margin-bottom: auto;
     font-weight: var(--weight-bold);
     flex-shrink: 0;
@@ -137,6 +154,10 @@ html {
     flex-shrink: 0;
 }
 
+.card_thin {
+    font-weight: var(--weight-normal);
+}
+
 .card__subrow {
     display: flex;
     align-items: center;
@@ -175,7 +196,7 @@ html {
     align-items: center;
 }
 .addForm {
-    width: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;

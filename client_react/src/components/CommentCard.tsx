@@ -6,6 +6,7 @@ import { IconButton } from './UI/IconButton';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../store/action-creators/comment';
 import { CommentForm } from './CommentForm';
+import { toDMY } from '../utils';
 
 interface CommentProps {
     comment: Comment,
@@ -21,36 +22,42 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
         setEditedComment(newComment);
         dispatch(editComment(newComment));
     }
-    return <div className={'cardWrapper' + className}>
+    const getTimeCreated = () => toDMY(comment.createdAt);
+    const getTimeEdited = () => comment.createdAt != comment.updatedAt ? ` (Изменён: ${toDMY(comment.updatedAt)})` : ``;
+    
+    return <div className={'cardWrapper'+className}>
         <div className='card'>
-            <div className='card__container'>
-                {!isEditing ? <>
-                <div className='card__title'>
-                    <Icon className='pr-4' path={mdiAccountCircle} size={1.3}/>
-                    <p className='card__body card_expanded'>{editedComment.body}</p>
-                </div>
-                </> : <CommentForm post_id={comment.post_id} defaultValue={editedComment} onClose={updateComment} editing/>}                
-            </div>
-            <div className='card__append'>
-                {isEditing && 
+            <div className='card__row'>
+                {!isEditing && <Icon className='pr-4' path={mdiAccountCircle} size={1.3}/>}
+                {!isEditing && <p className='card_expanded card_thin'>{editedComment.body}</p>}
+                {isEditing && <CommentForm className='card_thin' post_id={comment.post_id} defaultValue={editedComment} onClose={updateComment} editing/>}      
+                <div>
+                    {isEditing && 
+                        <IconButton
+                            onClick={() => {
+                                setEditing(false)
+                            }}
+                            iconPath={mdiCheck}
+                        />}
+                    {!isEditing && 
+                        <IconButton
+                            onClick={() => setEditing(true)}
+                            iconPath={mdiPencil}
+                        />}
                     <IconButton
+                        toDelete
+                        className="ml-2"
                         onClick={() => {
-                            setEditing(false)
+                            dispatch(deleteComment(editedComment))
                         }}
-                        iconPath={mdiCheck}
-                    />}
-                {!isEditing && 
-                    <IconButton
-                        onClick={() => setEditing(true)}
-                        iconPath={mdiPencil}
-                    />}
-                <IconButton
-                    toDelete
-                    className="ml-2"
-                    onClick={() => {
-                        dispatch(deleteComment(editedComment))
-                    }}
-                />
+                    />
+                </div>
+            </div>
+            <div className='card__row card__row_gap'>
+                <div className='card__subrow'>
+                    <p className='text text_secondary text_small'>{getTimeCreated()}</p>
+                    <p className='text text_secondary text_small'>{getTimeEdited()}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@ interface PostProps {
     showTitle?: boolean,
     className?: string
 }
-export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm = true, showTitle = true, ...props} : PostProps) => {
+export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm = true, showTitle = true, className = ''} : PostProps) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -34,14 +34,10 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
     }
     const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, []);
 
-    const getTimeCreated = () => {
-        return toDMY(post.createdAt);
-    }
-    const getTimeEdited = () => {
-        return post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``;
-    }
+    const getTimeCreated = () => toDMY(post.createdAt);
+    const getTimeEdited = () => post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``;
 
-    return <div className={`cardWrapper ${props.className ?? ''}`}>
+    return <div className={'cardWrapper'+className}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={`card${!disableLink ? ' card_link' : ''}`}>
             <div className='card__row'>
                 {!isEditing && <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>}
