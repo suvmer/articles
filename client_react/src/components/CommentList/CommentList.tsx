@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Comment } from '../types/comment';
-import { CommentCard } from './CommentCard';
+import { Comment } from '../../types/comment';
+import { CommentCard } from '../CommentCard/CommentCard';
 interface CommentListProps {
     comments: Comment[],
     showTitle?: boolean,

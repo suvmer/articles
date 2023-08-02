@@ -1,12 +1,12 @@
 import { FC, useState, useMemo } from 'react';
-import { Comment, CommentFormValue } from '../types/comment';
+import { Comment, CommentFormValue } from '../../types/comment';
 import Icon from '@mdi/react';
 import { mdiCheck, mdiPencil, mdiCommentOutline, mdiAccountCircle } from '@mdi/js';
-import { IconButton } from './UI/IconButton';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { deleteComment, editComment } from '../store/action-creators/comment';
-import { CommentForm } from './CommentForm';
-import { toDMY } from '../utils';
+import { IconButton } from '../UI/IconButton';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { deleteComment, editComment } from '../../store/action-creators/comment';
+import { CommentForm } from '../CommentForm/CommentForm';
+import { toDMY } from '../../utils';
 
 interface CommentProps {
     comment: Comment,

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Post } from '../types/post';
-import { PostCard } from './PostCard';
+import { Post } from '../../types/post';
+import { PostCard } from '../PostCard/PostCard';
 interface PostListProps {
     posts: Post[],
     expanded?: boolean,

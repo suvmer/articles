@@ -1,11 +1,11 @@
 import { FC, MouseEvent, MouseEventHandler, useEffect, useState } from 'react';
-import { NavigationButton } from './UI/NavigationButton';
-import { useTypedSelector } from '../hooks/useTypedSelector';
+import { NavigationButton } from '../UI/NavigationButton';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import Icon from '@mdi/react';
 import { mdiGithub } from '@mdi/js';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { UIActionTypes } from '../types/UI';
-import { sideBarVisible } from '../store/action-creators/ui';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { UIActionTypes } from '../../types/UI';
+import { sideBarVisible } from '../../store/action-creators/ui';
 
 export const SideBar:FC = () => {
     const [isHidden, setHidden] = useState<boolean>(false);

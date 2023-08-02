@@ -1,10 +1,10 @@
 import { FC, ChangeEvent, useState, useEffect, useRef, FormEvent } from 'react';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Icon } from '@mdi/react';
 import { mdiPostOutline } from '@mdi/js';
-import { CommentFormValue } from '../types/comment';
-import { addComment } from '../store/action-creators/comment';
+import { CommentFormValue } from '../../types/comment';
+import { addComment } from '../../store/action-creators/comment';
 
 interface CommentFormProps {
     onClose?: (arg0:CommentFormValue) => void,

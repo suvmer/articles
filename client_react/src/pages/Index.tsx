@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useOutlet } from 'react-router'
-import { Header } from '../components/Header';
-import { SideBar } from '../components/SideBar';
+import { Header } from '../components/Header/Header';
+import { SideBar } from '../components/SideBar/SideBar';
 
 export const Index : FC = () => {
     const outlet = useOutlet();

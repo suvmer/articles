@@ -1,15 +1,15 @@
 import { FC, useState, useMemo } from 'react';
-import { Post, PostFormValue } from '../types/post';
+import { Post, PostFormValue } from '../../types/post';
 import { useNavigate } from 'react-router';
-import { CommentList } from './CommentList';
+import { CommentList } from '../CommentList/CommentList';
 import Icon from '@mdi/react';
 import { mdiCheck, mdiComment, mdiCommentMultipleOutline, mdiPencil, mdiPostOutline } from '@mdi/js';
-import { IconButton } from './UI/IconButton';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { deletePost, editPost } from '../store/action-creators/post';
-import { PostForm } from './PostForm';
-import { CommentForm } from './CommentForm';
-import { toDMY } from '../utils';
+import { IconButton } from '../UI/IconButton';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { deletePost, editPost } from '../../store/action-creators/post';
+import { PostForm } from '../PostForm/PostForm';
+import { CommentForm } from '../CommentForm/CommentForm';
+import { toDMY } from '../../utils';
 
 interface PostProps {
     post: Post,
