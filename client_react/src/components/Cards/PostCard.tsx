@@ -39,7 +39,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
     const getTimeEdited = () => post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``;
 
     return <div className={styles.cardWrapper + ' ' +className}>
-        <div onClick={() => !disableLink && navigate(`/articles/post/${editedPost.id}`)} className={styles.card + ' ' + (!disableLink ? styles.card_link : '')}>
+        <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={styles.card + ' ' + (!disableLink ? styles.card_link : '')}>
             <div className={styles.card__row}>
                 {!isEditing && <Icon className='pr-4' path={mdiPostOutline} size={1.3}/>}
                 {!isEditing && <p className={expanded ? styles.card_expanded : ''}>{editedPost.title}</p>}

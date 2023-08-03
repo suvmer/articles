@@ -37,5 +37,5 @@ router.delete('/article/:id/comment/:commid', CommentsController.deleteComment);
 router.get('/analytic/comments/', AnalyticController.getComments);
 
 
-app.use("/articles/", router)
+app.use("/", router)
 app.use(errorMiddleware);
