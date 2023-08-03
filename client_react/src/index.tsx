@@ -3,8 +3,6 @@ import { store } from "./store/index";
 import { Provider } from "react-redux";
 import {
   createBrowserRouter,
-  createHashRouter,
-  createMemoryRouter,
   RouterProvider,
 } from "react-router-dom";
 import { MainPage } from './pages/MainPage';
@@ -13,7 +11,7 @@ import { PostPage } from './pages/PostPage';
 import { Index } from './pages/Index';
 import { CommentAnalytic } from './pages/CommentAnalytic';
 
-const router = createMemoryRouter([
+const router = createBrowserRouter([
   {
     path: "/articles/",
     element: <Index/>,
