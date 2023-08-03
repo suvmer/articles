@@ -1,6 +1,6 @@
 const ApiError = require("../exceptions/ApiError");
 const Comments = require("../models/Comments");
-const Posts = require("../models/posts");
+const Posts = require("../models/Posts");
 
 class ArticleController {
     async addArticle(req, res, next) {

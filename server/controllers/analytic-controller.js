@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const Comments = require("../models/Comments");
 const ApiError = require("../exceptions/ApiError");
-const Posts = require("../models/posts");
+const Posts = require("../models/Posts");
 
 class AnalyticController {
     async getComments(req, res, next) {
