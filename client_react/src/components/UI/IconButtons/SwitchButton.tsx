@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 import Icon from '@mdi/react';
 import { mdiMenu } from '@mdi/js';
+import styles from './IconButtons.module.css'
 
 interface SwitchButtonProps {
     onClick: (arg0: boolean) => void,
@@ -12,8 +13,9 @@ interface SwitchButtonProps {
 export const SwitchButton:FC<SwitchButtonProps> = ({onClick, iconPath = mdiMenu, className="", rotate=false, value = null}:SwitchButtonProps) => {
     const [pressed, setPressed] = useState<boolean>(false);
     const buttonState = (value ?? pressed); //controlled or uncontrolled
+    const isRotated = (rotate && buttonState);
     return <button
-                className={'IconButton '+className+ ((rotate && buttonState) ? ' IconButton_rotated' : '')}
+                className={styles.IconButton + ' ' + className + ' ' + (isRotated ? styles.IconButton_rotated : '')}
                 onClick={(e) => {
                     e.stopPropagation();
                     onClick(buttonState);

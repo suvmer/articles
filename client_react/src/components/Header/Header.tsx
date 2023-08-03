@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { UIActionTypes } from '../../types/UI';
-import { SwitchButton } from '../UI/SwitchButton'
+import { SwitchButton } from '../UI/IconButtons/SwitchButton'
 import { mdiMenu } from '@mdi/js';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { sideBarVisible } from '../../store/action-creators/ui';

@@ -1,0 +1,11 @@
+.IconButton {
+    width: 2rem;
+    height: 2rem;
+}
+.IconButton > * {
+    transform: rotate(0);
+    transition: transform 100ms ease-in;
+}
+.IconButton_rotated > * {
+    transform: rotate(90deg);
+}
