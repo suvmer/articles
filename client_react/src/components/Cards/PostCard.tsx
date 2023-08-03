@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { CommentList } from '../Lists/CommentList';
 import Icon from '@mdi/react';
 import { mdiCheck, mdiComment, mdiCommentMultipleOutline, mdiPencil, mdiPostOutline } from '@mdi/js';
-import { IconButton } from '../UI/IconButton';
+import { IconButton } from '../UI/IconButtons/IconButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { deletePost, editPost } from '../../store/action-creators/post';
 import { PostForm } from '../Forms/PostForm';
@@ -29,7 +29,7 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
     const disableLink = isEditing || showComments;
 
     const updatePost = (value:PostFormValue) => {
-        const newPost = {...editedPost, ...value};
+        const newPost:Post = {...editedPost, ...value, updatedAt: Date.now()};
         setEditedPost(newPost);
         dispatch(editPost(newPost));
     }

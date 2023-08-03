@@ -2,7 +2,7 @@ import { FC, useState, useMemo } from 'react';
 import { Comment, CommentFormValue } from '../../types/comment';
 import Icon from '@mdi/react';
 import { mdiCheck, mdiPencil, mdiCommentOutline, mdiAccountCircle } from '@mdi/js';
-import { IconButton } from '../UI/IconButton';
+import { IconButton } from '../UI/IconButtons/IconButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../../store/action-creators/comment';
 import { CommentForm } from '../Forms/CommentForm';
@@ -20,7 +20,7 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
     const [editedComment, setEditedComment] = useState<Comment>(comment);
 
     const updateComment = (value:CommentFormValue) => {
-        const newComment = {...editedComment, ...value};
+        const newComment:Comment = {...editedComment, ...value, updatedAt: Date.now()};
         setEditedComment(newComment);
         dispatch(editComment(newComment));
     }
