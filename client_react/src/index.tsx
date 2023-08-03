@@ -3,6 +3,8 @@ import { store } from "./store/index";
 import { Provider } from "react-redux";
 import {
   createBrowserRouter,
+  createHashRouter,
+  createMemoryRouter,
   RouterProvider,
 } from "react-router-dom";
 import { MainPage } from './pages/MainPage';
@@ -11,25 +13,25 @@ import { PostPage } from './pages/PostPage';
 import { Index } from './pages/Index';
 import { CommentAnalytic } from './pages/CommentAnalytic';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: "/",
+    path: "/articles/",
     element: <Index/>,
     errorElement: <ErrorPage/>,
     children: [
       {
-        path: "/",
+        path: "/articles/",
         loader: async () => document.title = "Список статей",
         element: <MainPage/>,
         index: true
       },
       {
-        path: "/comments",
+        path: "/articles/comments",
         loader: async () => document.title = "Комментарии",
         element: <CommentAnalytic/>
       },
       {
-        path: "/post/:id",
+        path: "/articles/post/:id",
         loader: async () => document.title = "Статья",
         element: <PostPage/>
       }

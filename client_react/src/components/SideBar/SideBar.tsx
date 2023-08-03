@@ -22,8 +22,8 @@ export const SideBar:FC = () => {
     return <>
         <div onClick={!isHidden ? () => {} : closeSideBar} className={styles.sideBarOverlay + ' ' + (isHidden ? styles.sideBarOverlay_visible : '')}/>
         <aside className={styles.sideBar + ' ' + (isHidden ? styles.sideBar_show : '')}>
-            <NavigationButton to="/">Список статей</NavigationButton>
-            <NavigationButton to="/comments">Комментарии</NavigationButton>
+            <NavigationButton to="/articles/">Список статей</NavigationButton>
+            <NavigationButton to="/articles/comments">Комментарии</NavigationButton>
             <a className={styles.button + ' ma-4'} href='https://github.com/suvmer/articles' target='_BLANK'>
                 <Icon path={mdiGithub} size={1.3}/>
                 GITHUB
