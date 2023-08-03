@@ -43,9 +43,8 @@ export const addComment = (comment:CommentFormValue) => {
 export const editComment = (comment:Comment) => {
     return async (dispatch: Dispatch<CommentAction>) => {
         try {
-            console.log(comment)
             dispatch({type: CommentActionTypes.FETCH_DATA});
-            const response = await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${comment.post_id}/comment/${comment.id}`, {...comment});
+            await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${comment.post_id}/comment/${comment.id}`, {...comment});
             dispatch({type: CommentActionTypes.EDIT_COMMENT, payload: comment});
         } catch(e:any) {
             if(e.response?.data?.message)

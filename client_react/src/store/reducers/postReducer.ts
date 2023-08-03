@@ -16,7 +16,7 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
         case PostActionTypes.FETCH_POSTS_RESOLVE:
             return {...state, loading: false, posts: (action as FetchPostsResolveAction).payload};
         case PostActionTypes.FETCH_POST_COMMENTS_RESOLVE:
-            if(!state.postToShow || state.postToShow.id != (action as FetchPostCommentsResolveAction).payload.post_id)
+            if(!state.postToShow || state.postToShow.id !== (action as FetchPostCommentsResolveAction).payload.post_id)
                 return state;
             return {...state, loading: false, postToShow: {...state.postToShow, comments: (action as FetchPostCommentsResolveAction).payload.comments}}
         case PostActionTypes.FETCH_POST_RESOLVE:
@@ -42,7 +42,7 @@ export const postReducer = (state = initialState, action: PostAction) : PostStat
             const deleteComment = (action as AppendCommentAction).payload;
             if(!state.postToShow)
                 return {...state};
-            return {...state, loading: false, postToShow: {...state.postToShow, comments: state.postToShow.comments.filter(comment => comment.id != deleteComment.id)}};
+            return {...state, loading: false, postToShow: {...state.postToShow, comments: state.postToShow.comments.filter(comment => comment.id !== deleteComment.id)}};
         default:
             return state;        
     }

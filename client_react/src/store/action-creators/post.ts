@@ -43,7 +43,7 @@ export const editPost = (post:Post) => {
     return async (dispatch: Dispatch<PostAction>) => {
         try {
             dispatch({type: PostActionTypes.FETCH_DATA});
-            const response = await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`, {...post});
+            await axios.patch(process.env.REACT_APP_SERVER_URL+`/article/${post.id}`, {...post});
             dispatch({type: PostActionTypes.EDIT_POST, payload: post});
         } catch(e:any) {
             if(e.response?.data?.message)

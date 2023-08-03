@@ -13,6 +13,7 @@ export const PostPage : FC = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchPost(Number(id)));
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const nothingToShow = loading && !postToShow;
     return (nothingToShow ?

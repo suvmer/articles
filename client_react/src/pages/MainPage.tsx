@@ -8,7 +8,10 @@ import { PostForm } from '../components/Forms/PostForm';
 
 export const MainPage : FC = (props) => {
     const dispatch = useAppDispatch();
-    useEffect(() => { dispatch(fetchPosts()) }, []);
+    useEffect(() => {
+        dispatch(fetchPosts())
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const {loading, posts} = useTypedSelector(state => state.posts);
     const MemoPostForm = useMemo(() => <PostForm/>, []);
     const postList = (loading && !posts) ?
