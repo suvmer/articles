@@ -13,7 +13,7 @@ import { PostPage } from './pages/PostPage';
 import { Index } from './pages/Index';
 import { CommentAnalytic } from './pages/CommentAnalytic';
 
-const router = createHashRouter([
+const router = createMemoryRouter([
   {
     path: "/articles/",
     element: <Index/>,
