@@ -1,5 +1,6 @@
 {
   "name": "client_react",
+  "homepage": "articles/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
