@@ -19,5 +19,5 @@ export const PostPage : FC = () => {
                 <SimpleCard className='mt-4'>Загрузка</SimpleCard> :
                 postToShow ?
                     <PostCard key={postToShow.id} expanded post={postToShow}/> :
-                    <p>Пост не найден</p>);
+                    <SimpleCard className='mt-4'>Пост не найден</SimpleCard>);
 }
