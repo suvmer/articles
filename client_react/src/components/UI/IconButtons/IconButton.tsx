@@ -2,13 +2,8 @@ import { FC, useState } from 'react'
 import Icon from '@mdi/react';
 import { mdiDelete, mdiDeleteSweep, mdiDeleteAlert } from '@mdi/js';
 import styles from './IconButtons.module.css'
+import { IconButtonProps } from '../../../types/UI';
 
-interface IconButtonProps {
-    onClick: () => void,
-    toDelete?: boolean,
-    iconPath?: string,
-    className?: string
-}
 export const IconButton:FC<IconButtonProps> = ({onClick, toDelete = false, iconPath = mdiDelete, className=""}:IconButtonProps) => {
     const [stage, setStage] = useState<number>(0);
     return  <button

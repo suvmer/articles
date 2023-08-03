@@ -1,8 +1,7 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC } from 'react'
 import styles from "./Card.module.css";
-interface SimpleCardProps extends PropsWithChildren {
-    className?: string
-}
+import { SimpleCardProps } from '../../types/UI';
+
 export const SimpleCard:FC<SimpleCardProps> = ({children = "", className=""}:SimpleCardProps) => {
     return <div className={styles.card + ' ' + className}>{children}</div>
 }

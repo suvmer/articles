@@ -3,17 +3,9 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Icon } from '@mdi/react';
 import { mdiPostOutline } from '@mdi/js';
-import { CommentFormValue } from '../../types/comment';
+import { CommentFormProps, CommentFormValue } from '../../types/comment';
 import { addComment } from '../../store/action-creators/comment';
 import styles from "./Form.module.css";
-
-interface CommentFormProps {
-    onClose?: (arg0:CommentFormValue) => void,
-    defaultValue?: CommentFormValue,
-    editing?: boolean,
-    post_id?: number,
-    className?: string
-}
 
 export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body: "", post_id: 0}, editing = false, post_id = 0, className=''}:CommentFormProps) => {
     const [value, setValue] = useState<CommentFormValue>({...defaultValue, post_id});
@@ -27,7 +19,11 @@ export const CommentForm:FC<CommentFormProps> = ({onClose, defaultValue = {body:
             return newValue;
         });
     }
-    useEffect(() => () => onClose && onClose(valueRef.current), []);
+    useEffect(() => () => {
+        if(onClose)
+            onClose(valueRef.current)
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     
     const submitForm = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();

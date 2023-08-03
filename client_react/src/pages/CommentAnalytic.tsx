@@ -36,17 +36,17 @@ export const CommentAnalytic: FC = () => {
         const newDates = {dateFrom: normalizeTimeStamp(starting).toString(), dateTo: normalizeTimeStamp(ending + DAY_MS).toString()};
         setDates(newDates);
         setSearchParams(newDates);
-        dispatch(fetchComments(newDates))
     }
     useEffect(() => {
         dispatch(fetchComments(dates))
-    }, [])
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dates])
 
     useEffect(() => {
         const grouppedComments = comments.reduce((acc:Comment[][], cur:Comment) => {
-            if(acc.length == 0 || acc[acc.length-1][0].post_id != cur.post_id)
+            if(acc.length === 0 || acc[acc.length-1][0].post_id !== cur.post_id)
                 return [...acc, [cur]];
-            return acc.map((group, index) => index == acc.length - 1 ? [...group, cur] : group);
+            return acc.map((group, index) => index === acc.length - 1 ? [...group, cur] : group);
         }, []);
         setGroups(grouppedComments.map(group => ({...group[0].Post, comments: group})));
     }, [comments])

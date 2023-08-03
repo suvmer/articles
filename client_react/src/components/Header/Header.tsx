@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { UIActionTypes } from '../../types/UI';
 import { SwitchButton } from '../UI/IconButtons/SwitchButton'
 import { mdiMenu } from '@mdi/js';
 import { useTypedSelector } from '../../hooks/useTypedSelector';

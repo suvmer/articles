@@ -1,7 +1,7 @@
-import { FC, useState, useMemo } from 'react';
-import { Comment, CommentFormValue } from '../../types/comment';
+import { FC, useState } from 'react';
+import { Comment, CommentFormValue, CommentProps } from '../../types/comment';
 import Icon from '@mdi/react';
-import { mdiCheck, mdiPencil, mdiCommentOutline, mdiAccountCircle } from '@mdi/js';
+import { mdiCheck, mdiPencil, mdiAccountCircle } from '@mdi/js';
 import { IconButton } from '../UI/IconButtons/IconButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { deleteComment, editComment } from '../../store/action-creators/comment';
@@ -9,11 +9,6 @@ import { CommentForm } from '../Forms/CommentForm';
 import { toDMY } from '../../utils';
 import styles from "./Card.module.css";
 
-
-interface CommentProps {
-    comment: Comment,
-    className?: string
-}
 export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentProps) => {
     const dispatch = useAppDispatch();
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -25,7 +20,7 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
         dispatch(editComment(newComment));
     }
     const getTimeCreated = () => toDMY(editedComment.createdAt);
-    const getTimeEdited = () => editedComment.createdAt != editedComment.updatedAt ? ` (Изменён: ${toDMY(editedComment.updatedAt)})` : ``;
+    const getTimeEdited = () => editedComment.createdAt !== editedComment.updatedAt ? ` (Изменён: ${toDMY(editedComment.updatedAt)})` : ``;
     
     return <div className={styles.cardWrapper +' '+className}>
         <div className={styles.card}>

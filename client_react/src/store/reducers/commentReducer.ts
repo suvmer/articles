@@ -1,5 +1,4 @@
 import { AddCommentAction, CommentAction, CommentActionTypes, CommentState, DeleteCommentAction, EditCommentAction, FETCH_ERROR, FetchCommentsResolveAction } from "../../types/comment";
-import { PostActionTypes } from "../../types/post";
 
 const initialState: CommentState = {
     comments: [],

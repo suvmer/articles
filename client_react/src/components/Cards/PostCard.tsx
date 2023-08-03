@@ -1,9 +1,9 @@
 import { FC, useState, useMemo } from 'react';
-import { Post, PostFormValue } from '../../types/post';
+import { Post, PostFormValue, PostProps } from '../../types/post';
 import { useNavigate } from 'react-router';
 import { CommentList } from '../Lists/CommentList';
 import Icon from '@mdi/react';
-import { mdiCheck, mdiComment, mdiCommentMultipleOutline, mdiPencil, mdiPostOutline } from '@mdi/js';
+import { mdiCheck, mdiCommentMultipleOutline, mdiPencil, mdiPostOutline } from '@mdi/js';
 import { IconButton } from '../UI/IconButtons/IconButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { deletePost, editPost } from '../../store/action-creators/post';
@@ -12,13 +12,6 @@ import { CommentForm } from '../Forms/CommentForm';
 import { toDMY } from '../../utils';
 import styles from "./Card.module.css";
 
-interface PostProps {
-    post: Post,
-    expanded?: boolean,
-    showCommentsForm?: boolean,
-    showTitle?: boolean,
-    className?: string
-}
 export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm = true, showTitle = true, className = ''} : PostProps) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -33,10 +26,10 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
         setEditedPost(newPost);
         dispatch(editPost(newPost));
     }
-    const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, []);
+    const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, [post.id]);
 
     const getTimeCreated = () => toDMY(editedPost.createdAt);
-    const getTimeEdited = () => editedPost.createdAt != editedPost.updatedAt ? ` (Изменён: ${toDMY(editedPost.updatedAt)})` : ``;
+    const getTimeEdited = () => editedPost.createdAt !== editedPost.updatedAt ? ` (Изменён: ${toDMY(editedPost.updatedAt)})` : ``;
 
     return <div className={styles.cardWrapper + ' ' +className}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={styles.card + ' ' + (!disableLink ? styles.card_link : '')}>

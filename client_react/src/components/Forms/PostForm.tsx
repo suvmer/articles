@@ -1,18 +1,11 @@
 import { FC, ChangeEvent, useState, useEffect, useRef, FormEvent } from 'react';
-import { PostFormValue } from '../../types/post';
+import { PostFormProps, PostFormValue } from '../../types/post';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addPost } from '../../store/action-creators/post';
 import { Icon } from '@mdi/react';
 import { mdiPostOutline } from '@mdi/js';
 import styles from './Form.module.css';
-
-
-interface PostFormProps {
-    onClose?: (arg0:PostFormValue) => void,
-    defaultValue?: PostFormValue,
-    editing?: boolean
-}
 
 export const PostForm:FC<PostFormProps> = ({onClose, defaultValue = {title: "", body: ""}, editing = false}:PostFormProps) => {
     const [value, setValue] = useState<PostFormValue>(defaultValue);
@@ -26,7 +19,7 @@ export const PostForm:FC<PostFormProps> = ({onClose, defaultValue = {title: "", 
             return newValue;
         });
     }
-    useEffect(() => () => onClose && onClose(valueRef.current), []);
+    useEffect(() => () => onClose && onClose(valueRef.current), [onClose]);
     
     const submitForm = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
