@@ -1,6 +1,25 @@
 # articles
 A simple full-stack application created as a test task. (CRUD posts, comments, analytics)
 
+# Клиент на React + Redux + Router
+**Демо версия**:
+https://suvmer.github.io/articles/
+
+Исходный код:
+https://github.com/suvmer/articles/tree/master/client_react
+
+**Важно:** из-за развёртки демо на GitHub Pages, которые не поддерживают в полной мере SPA, **нельзя перезагружать страницы**, кроме главной(https://suvmer.github.io/articles/)
+
+При запуске проекта в окружении, поддерживающим Single Page Application, роутинг работает корректно.
+
+![Screenshot](articles_react.png)
+
+# Клиент на Vue 3 + vuex + Vuetify
+Исходный код:
+https://github.com/suvmer/articles/tree/master/client
+
+![Screenshot](articles.png)
+
 # Как подготовить проект перед запуском:
 1. Указать данные для подключения к БД в ~/server/config/config.js
 2. Выполнить миграции и сиды(находясь в папке server):
@@ -9,8 +28,6 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 3. Указать адрес сервера API_URL в client/.env
-
-![Screenshot](articles.png)
 
 # Описание задания: Статьи
 
