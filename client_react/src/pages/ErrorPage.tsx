@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { SimpleCard } from '../components/Cards/SimpleCard'
 export const ErrorPage : FC = () => {
-    return <div>Not found</div>
+    return <SimpleCard>Not found</SimpleCard>
 }
