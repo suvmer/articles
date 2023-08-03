@@ -24,8 +24,8 @@ export const CommentCard:FC<CommentProps> = ({comment, className=''} : CommentPr
         setEditedComment(newComment);
         dispatch(editComment(newComment));
     }
-    const getTimeCreated = () => toDMY(comment.createdAt);
-    const getTimeEdited = () => comment.createdAt != comment.updatedAt ? ` (Изменён: ${toDMY(comment.updatedAt)})` : ``;
+    const getTimeCreated = () => toDMY(editedComment.createdAt);
+    const getTimeEdited = () => editedComment.createdAt != editedComment.updatedAt ? ` (Изменён: ${toDMY(editedComment.updatedAt)})` : ``;
     
     return <div className={styles.cardWrapper +' '+className}>
         <div className={styles.card}>

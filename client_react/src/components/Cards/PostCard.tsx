@@ -35,8 +35,8 @@ export const PostCard:FC<PostProps> = ({post, expanded = false, showCommentsForm
     }
     const MemoCommentForm = useMemo(() => <CommentForm className='mt-4' post_id={post.id}/>, []);
 
-    const getTimeCreated = () => toDMY(post.createdAt);
-    const getTimeEdited = () => post.createdAt != post.updatedAt ? ` (Изменён: ${toDMY(post.updatedAt)})` : ``;
+    const getTimeCreated = () => toDMY(editedPost.createdAt);
+    const getTimeEdited = () => editedPost.createdAt != editedPost.updatedAt ? ` (Изменён: ${toDMY(editedPost.updatedAt)})` : ``;
 
     return <div className={styles.cardWrapper + ' ' +className}>
         <div onClick={() => !disableLink && navigate(`/post/${editedPost.id}`)} className={styles.card + ' ' + (!disableLink ? styles.card_link : '')}>
