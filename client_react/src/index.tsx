@@ -13,23 +13,23 @@ import { CommentAnalytic } from './pages/CommentAnalytic';
 
 const router = createBrowserRouter([
   {
-    path: "/articles",
+    path: "/",
     element: <Index/>,
     errorElement: <ErrorPage/>,
     children: [
       {
-        path: "/articles",
+        path: "/",
         loader: async () => document.title = "Список статей",
         element: <MainPage/>,
         index: true
       },
       {
-        path: "/articles/comments",
+        path: "/comments",
         loader: async () => document.title = "Комментарии",
         element: <CommentAnalytic/>
       },
       {
-        path: "/articles/post/:id",
+        path: "/post/:id",
         loader: async () => document.title = "Статья",
         element: <PostPage/>
       }
