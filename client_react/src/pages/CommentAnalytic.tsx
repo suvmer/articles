@@ -11,21 +11,23 @@ import { CustomProvider, DateRangePicker } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 import { DateRange } from 'rsuite/esm/DateRangePicker';
 import {ruRU} from 'rsuite/locales';
+import { SimpleCard } from '../components/Cards/SimpleCard';
 
 export const CommentAnalytic: FC = () => {
     const {loading, comments} = useTypedSelector(state => state.comments);
-    
     const [searchParams, setSearchParams] = useSearchParams();
     const [commentGroups, setGroups] = useState<Post[]>([]);
     const [dates, setDates] = useState<AnalyticPageParams>({dateFrom: searchParams.get('dateFrom') ?? (Date.now()-MONTH_MS).toString(), dateTo: searchParams.get('dateTo') ?? Date.now().valueOf().toString()})
+    const dispatch = useAppDispatch();
 
-/*
-Обнуляется время у дат на 00:00:00
-У даты конца до этого прибавляется день, чтобы при start=end выбирался выбранный день
-Пример: (startDate -> starting;    endTime -> ending):
-start    15.10.23 03:05 -> start 15.10.23 00:00
-end      15.10.23 16:34 -> end 16.10.23 00:00
-*/
+/**
+ * заранее округляет даты(до времени 00:00:00)
+ * @example
+ *   start: 15.10.23 03:05 -> 15.10.23 00:00
+ *   end: 15.10.23 16:34 -> 16.10.23 00:00
+ * @param value 
+ * @returns 
+ */
     const updateDates = (value:DateRange | null, event:SyntheticEvent<Element, Event>) => {
         if(!value)
             return;
@@ -36,8 +38,6 @@ end      15.10.23 16:34 -> end 16.10.23 00:00
         setSearchParams(newDates);
         dispatch(fetchComments(newDates))
     }
-    const dispatch = useAppDispatch();
-
     useEffect(() => {
         dispatch(fetchComments(dates))
     }, [])
@@ -50,8 +50,13 @@ end      15.10.23 16:34 -> end 16.10.23 00:00
         }, []);
         setGroups(grouppedComments.map(group => ({...group[0].Post, comments: group})));
     }, [comments])
-    const list = ((loading && !commentGroups?.length) ? <div className='card mt-4'>Загрузка</div> : (commentGroups?.length ? <PostList className="mt-4" expanded posts={commentGroups}/> :
-        <div className='card mt-4'>Нет комментариев</div>));
+
+    const nothingToShow = loading && !commentGroups?.length;
+    const list = (nothingToShow ?
+        <SimpleCard className='mt-4'>Загрузка...</SimpleCard> :
+        (commentGroups?.length ?
+            <PostList className="mt-4" expanded posts={commentGroups}/> :
+            <SimpleCard className='mt-4'>Нет комментариев</SimpleCard>));
     return <>
         <CustomProvider locale={ruRU}>
             <DateRangePicker

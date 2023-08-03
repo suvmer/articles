@@ -8,9 +8,6 @@ a {
     color: var(--on-surface)!important;
 }
 
-svg {
-    flex-shrink: 0;
-}
 button {
     background-color: transparent;
     outline: none;
@@ -32,33 +29,6 @@ html {
     --weight-normal: 400;
     --weight-bold: 600;
 }
-.header {
-    position: fixed;
-    display: flex;
-    height: var(--header-height);
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    padding: 20px;
-    font-size: 1.4rem;
-    background-color: var(--primary);
-    color: var(--on-primary);
-    z-index: 2;
-}
-
-.navigationButton {
-    padding: 20px 10px;
-    display: flex;
-    justify-content: space-around;
-    color: var(--on-surface);
-}
-.navigationButton.active {
-    background-color: rgba(0, 0, 0, 0.16);
-}
-.navigationButton:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: background-color 100ms linear;
-}
 
 .main {
     padding-right: 50px;
@@ -76,13 +46,6 @@ html {
     margin: auto;
 }
 
-
-
-
-
-.menuIcon {
-    display: none;
-}
 .IconButton {
     width: 2rem;
     height: 2rem;
@@ -135,9 +98,6 @@ html {
     }
     .main {
         padding-right: 0;
-    }
-    .menuIcon {
-        display: block;
     }
 }
 

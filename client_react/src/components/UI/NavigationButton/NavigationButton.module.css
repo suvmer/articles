@@ -1,0 +1,13 @@
+.navigationButton {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-around;
+    color: var(--on-surface);
+}
+.navigationButton.active {
+    background-color: rgba(0, 0, 0, 0.16);
+}
+.navigationButton:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 100ms linear;
+}

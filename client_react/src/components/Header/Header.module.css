@@ -1,0 +1,21 @@
+.header {
+    position: fixed;
+    display: flex;
+    height: var(--header-height);
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding: 20px;
+    font-size: 1.4rem;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    z-index: 2;
+}
+.menuIcon {
+    display: none;
+}
+@media only screen and (max-width: 992px) {
+    .menuIcon {
+        display: block;
+    }
+}

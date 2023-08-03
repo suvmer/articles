@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, useEffect, useState } from 'react';
-import { NavigationButton } from '../UI/NavigationButton';
+import { NavigationButton } from '../UI/NavigationButton/NavigationButton';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import Icon from '@mdi/react';
 import { mdiGithub } from '@mdi/js';
